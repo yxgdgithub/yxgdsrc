@@ -1,0 +1,55 @@
+CREATE TABLE `t_gd_plan` (
+  `gdId` int(11) NOT NULL  AUTO_INCREMENT,
+  `gdTitle` varchar(128) COLLATE utf8_bin DEFAULT NULL COMMENT '共读标题',
+  `signupBeginDate` varchar(8) COLLATE utf8_bin DEFAULT NULL COMMENT '报名开始日期,从凌晨开始',
+  `signupEndDate` varchar(8) COLLATE utf8_bin DEFAULT NULL COMMENT '报名结束日期,到23:59结束',
+  `gdBeginDate` varchar(8) COLLATE utf8_bin DEFAULT NULL COMMENT '共读开始日期,从凌晨开始',
+  `gdEndDate` varchar(8) COLLATE utf8_bin DEFAULT NULL COMMENT '共读结束日期,到23:59结束',
+  `gdState` varchar(1) COLLATE utf8_bin DEFAULT NULL COMMENT '共读状态,0:未发布;1:已发布;2,删除',
+  `createUserId` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '创建人编号',
+  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  `updateUserId` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '修改人编号',
+  `updateTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改时间',
+  `sponsorUser` varchar(64) COLLATE utf8_bin DEFAULT NULL COMMENT '共读发起人',
+  `gdInstr` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT '共读说明',
+   `gdSlogan` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT '共读口号',
+  PRIMARY KEY (`gdId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='共读计划主表'
+
+alter table t_gd_plan  AUTO_INCREMENT = 1000;
+
+CREATE TABLE `t_gd_book` (
+  `bookId` int(11) NOT NULL  AUTO_INCREMENT,
+  `bookName` varchar(128) COLLATE utf8_bin DEFAULT NULL COMMENT '图书名称',
+  `bookAuthor` varchar(64) COLLATE utf8_bin DEFAULT NULL COMMENT '图书作者',
+  `bookTag` varchar(128) COLLATE utf8_bin DEFAULT NULL COMMENT '图书出版社',
+  `bookSltPath` varchar(128) COLLATE utf8_bin DEFAULT NULL COMMENT '图书缩略图路径,存放相对路径,结合码值表确定绝对路径',
+  `bookSummary` varchar(1024) COLLATE utf8_bin DEFAULT NULL COMMENT '图书简介',
+   `chapterSum` int(3) COLLATE utf8_bin DEFAULT NULL COMMENT '章节数',
+  `createUserId` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '创建人编号',
+
+  `createTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+
+  `updateUserId` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '修改人编号',
+  `updateTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改时间',
+  PRIMARY KEY (`bookId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='共读图书信息明细表'
+
+alter table t_gd_book  AUTO_INCREMENT = 1000;
+
+CREATE TABLE `t_gd_book_resource` (
+  `fileId` int(11) NOT NULL AUTO_INCREMENT,
+  `bookId` int(11) NOT NULL COMMENT '图书编号,采用UUID,无业务含义',
+  `bookChapter` int(11) NOT NULL COMMENT '图书章节',
+  `fileType` varchar(2) COLLATE utf8_bin NOT NULL COMMENT '文件类型:01文本文件;02音频文件;03视频文件',
+  `fileState` varchar(1) COLLATE utf8_bin DEFAULT NULL COMMENT '文件状态0:正常;1:已删除',
+  `filePath` varchar(128) COLLATE utf8_bin DEFAULT NULL,
+  `fileName` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `fileSize` float DEFAULT NULL,
+  `createUserId` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '创建人编号',
+  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  `updateUserId` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '修改人编号',
+  `updateTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改时间',
+  PRIMARY KEY (`fileId`)
+) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='共读图书资源信息表'
+alter table t_gd_book_resource  AUTO_INCREMENT = 1000;

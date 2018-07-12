@@ -1,0 +1,32 @@
+<ion-view view-title="我的共读">
+	<ion-content class="setting">
+		<div id="gdRadio" style="margin-top: 30px;display: none;"></div>
+		<div id="gdPage" style="display: none;border:0px solid #000;margin: 8px;" class="divcss5">
+			<p class="myReadTitle"></p>
+			<a class="myBtn myReadBtn" id="signOut">签到</a>
+			<a class="myBtn myReadBtnOn" id = "signIn" disabled="disabled" style="display: none;">已签到</a>
+		</div>
+		<p id="gdNopage" style="margin:0 auto;position: relative;top:150px;text-align: center;"></p>
+	</ion-content>
+</ion-view> 
+
+<!--签到二维码弹窗-->
+<div class="myQRcode" style="display: none;letter-spacing: 1px;line-height: 20px;">
+	<span class="codeClose">X</span>
+	<img id="myHeadImg" class="avatarPre" style="margin-top: 2px;" />
+	<p class="codeTitle" style="line-height: 18px;margin-top: 5px;">我正在阅读:&lt;&lt;<span id="bookName"></span>&gt;&gt;</p>
+	<div class="myQRimgs"><img id="bookSltPath" ng-src="" /></div>
+	<p class="myToday">我是今日</p>
+	<p class="myBookFd" style="margin-top: 3px;">第<span id="rownum"></span>个签到此书的书友</p>
+	<p class="myToday">本期我已连续签到<span id="signContinuousDays"></span>天</p>
+	<p class="challenge">你敢来挑战吗？</p>
+	<p class="myToday" style="margin: 0;">“21天养成读书习惯”</p>
+	<div class="myQRcodeScholl"><img src="img/ec-qrcode-app.png" /></div>
+	<p class="myToday">长按识别二维码关注</p>
+</div>
+	<!--灰色遮罩层-->
+<div class="masking" style="display: none;"></div>
+
+<script>
+	
+</script>

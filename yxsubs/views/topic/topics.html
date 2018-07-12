@@ -1,0 +1,77 @@
+ <ion-view view-title="当期共读">
+	<ion-content>
+		<div style="background-color: #fff;">
+		<div style="width:100%;height:200px; background-image: url(img/bg.png); background-repeat: no-repeat;background-size:100% 100%;">
+			<div class="row">
+				<div class="col" style="text-align: center;">
+					<h2 style="color: #fff; margin-top: 0.5em; margin-bottom: 1em;letter-spacing: 4px;font-size: 1.6em;">{{now.gdTitle}}</h2>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col col-20 ">
+					<div class="col-offset-20" style="width:6em;height:6em; border-radius: 50%; background-image: url(img/login_logo.png);background-repeat: no-repeat;background-size:100% 100%;"></div>
+				</div>
+				<div class="col col-60 col-offset-10 white" style="margin-top:2%">
+					<p class="nameTitle" style="margin-top: 0.5em">{{now.gdSlogan}}</p>
+					<p class="sTitle" style="margin-top: 1em">{{now.sponsorUser}}</p>
+				</div>
+			</div> 
+		</div>
+		<ion-list>
+			<ion-item style="border:none; margin-top: 1em;">
+				<h2 class="center padding topicTitle">-&nbsp;本期共读&nbsp;-</h2>
+				<p class="center padding" style="margin-bottom: 10px;">【 计划周期： {{now.gdBeginDate}}-{{now.gdEndDate}} 】</p>
+				
+			  <!--does-continue="true" -->
+				<ion-slide-box ng-if="now.gdBook" active-slide="myActiveSlide" style="width:100%;" auto-play="true" 
+					 slide-interval="4000" delegate-handle="slideimgs" >
+					
+					<ion-slide class='padding' ng-repeat="items in now.gdBook">
+						<div class="box" style="width: 340px;">
+							<div class="row" style="align-content: center;">
+								<div style="width:110px; height:140px; border:0px solid #000;margin-left: 40px;"  >
+									<img ng-src="{{items.bookSltPath}}" ui-sref="tab.topic-detail({'id':items.bookId})" style="width: 100%;height: 100%;" />
+								</div>
+								<div style="border:0px solid #000;letter-spacing: 2px;line-height: 30px;width:230px;text-align:left; padding:3px;margin-left:8px;height:140px;">
+									<p style="color: #387ef5;white-space: initial;">书名:{{items.bookName}}</p>
+									<p style="color: #387ef5;">作者:{{items.bookAuthor}}</p>	
+									<p style="color: #387ef5;">出版社:{{items.bookTag}}</p>
+								</div>
+							</div>
+						</div>
+					</ion-slide>
+				</ion-slide-box>
+			</ion-item>
+			<ion-item style="border:none;">
+				<h2 class="center padding topicTitle">-&nbsp;共读情况&nbsp;-</h2>
+				<p class="center padding" style="margin-bottom: 10px;">已报名&nbsp;<span style="color: #387ef5;font-size: 1.6em; font-weight: bold;" id="spanApplyNum">{{now.applyNum}}</span>&nbsp;人 </p>
+			</ion-item>
+		</ion-list>
+	</div>
+	<ion-list >
+		<ion-item style="border:none; margin-top: 1em;">
+			<h2 class="center padding topicTitle">-&nbsp;剩余报名时间&nbsp;-</h2>
+				<div class="colockbox" id="demo01">
+					<span class="day">-</span>
+					<span class="hour">-</span>
+					<span class="minute">-</span>
+					<span class="second">-</span>
+				</div>
+		</ion-item>
+	</ion-list>
+	<ion-list >
+		<ion-item style="border:none; margin-top: 1em;">
+			<h2 class="center padding topicTitle">-&nbsp;共读说明&nbsp;-</h2>
+			<div style="border: 1px #CCCCCC solid;border-radius:6px;margin: 10px;"><p style="line-height: 20px;letter-spacing: 2px;width:90%;margin: 5%;white-space:initial;">{{now.gdInstr}}</p></div>
+		</ion-item>
+	</ion-list>
+	<div class="content padding">
+		<button class="button button-block button-positive" disabled="true" id="gdapply" ng-click="apply(now.gdId,now.applyFlag,now.userToken)">
+			<span class="topicTitle" id="confirm">立即报名</span>
+			<span class="topicTitle" id="cancel">取消报名</span>
+			<span class="topicTitle" id="down_">已结束</span>
+		</button>
+	</div>
+	</ion-content>
+</ion-view>

@@ -1,0 +1,25 @@
+<ion-view>
+  <ion-content>
+    <ion-list class="replies">
+      <ion-item style="background-color: #f5f5f5;">
+					<div class="row">
+						<div class="col col-33"><!-- col-offset-10-->
+							<img ng-src="{{book.bookSltPath}}" ui-sref="tab.topic-detail" style="width: 80%;" />
+						</div>
+						<div class="col col-50">
+							<p style="margin-bottom: 1em;white-space:initial;">{{book.bookName}}</p>
+							<p style="color: #387ef5;">{{book.bookAuthor}}</p>
+							<p>标签 &nbsp;<span>{{book.bookTag}}</span></p>
+							<p>章节 &nbsp;<span>10</span></p>
+						</div>
+					</div>
+      </ion-item>
+    </ion-list>
+   	<div class="padding">
+   		<div class="box padding">
+   			<span class="line-height-18">{{book.bookSummary}}</span>
+   		</div>
+   	</div>		
+  </ion-content>  
+</ion-view>
+

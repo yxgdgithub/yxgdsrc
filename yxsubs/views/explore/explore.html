@@ -1,0 +1,96 @@
+<ion-view view-title="共度计划">
+  <ion-content>
+    	<ul class="row sTab padding_0">
+    		<li class="col col-33" ng-class="index == 0 ?'active col-33':'col-33'"><a href="#" ng-click="activeSlide(0)">正在进行</a></li>
+    		<li class="col col-33" ng-class="index == 1 ?'active col-33':'col-33'"><a href="#" ng-click="activeSlide(1)">已完成</a></li>
+    		<li class="col col-33" ng-class="index == 2 ?'active col-33':'col-33'"><a href="#" ng-click="activeSlide(2)">下期預告</a></li>
+    	</ul>
+		<ion-slide-box on-slide-changed='slideChanged($index)' active-slide='index' does-continue='true' auto-play='false' show-pager='false'>
+			<!--正在进行-->
+			<ion-slide>
+				<ion-item class="item-divider item-gap"></ion-item>
+				<ion-item ng-repeat="item in underway">
+			  		<div class="row padding_0">
+				    	<p class="col col-60 font_bold pblack">
+				    		{{item.gdTitle}}
+				    	</p>
+				    	<p class="col psize_08 text-right">{{item.gdEndDate}} 共读结束</p>
+				    </div>
+				    <div class="row padding_0">
+				    	<div class="col col-75">
+				    		<p class="pblack paddingtop_6">{{item.gdSlogan}}</p>
+							<p class="psize_08">{{item.sponsorUser}}</p>
+				    	</div>
+				    	<div class="col col-25 button_qian" ng-click="buttonQian(item.gdBeginDate,item.gdEndDate)"><span>查看签到</span></div>
+				    </div>
+				    <div class="booklist">
+					    <ul class="row">
+					    	<li class="col col-33" ng-repeat="items in item.gdBook"><img ng-src="{{items.bookSltPath}}" /></li>
+					    </ul>
+				    </div>
+			  </ion-item>
+			</ion-slide>
+			
+			<!--已完成-->
+			<ion-slide>
+				<ion-item class="item-divider item-gap"></ion-item>
+				<ion-item ng-repeat="item in accomplish">
+			  		<div class="row padding_0">
+				    	<p class="col col-60 font_bold pblack">
+				    		{{item.gdTitle}}
+				    	</p>
+				    	<p class="col psize_08 text-right">{{item.gdEndDate}} 共读结束</p>
+				    </div>
+			    	<div class="row padding_0 paddingtop_6">
+				    	<div class="col col-20">
+					    	<p>{{item.signRate}}%</p>
+					    	<p class="pblack">签到率</p>
+				    	</div>
+				    	<div class="col col-20">
+				    		<p>{{item.signContinuousDays}}天</p>
+					    	<p class="pblack">累计签到</p>
+				    	</div>
+				    	<div class="col col-25 col-offset-35 button_qian" ng-click="buttonQian(item.gdBeginDate,item.gdEndDate)"><span>查看签到</span></div>
+			    	</div>
+				    <div class="booklist">
+					    <ul class="row">
+					    	<li class="col col-33" ng-repeat="items in item.gdBook"><img ng-src="{{items.bookSltPath}}" /></li>
+					    </ul>
+				    </div>
+			  	</ion-item>
+			</ion-slide>
+			
+			<!--下期预告-->
+			<ion-slide>
+				<ion-item class="item-divider item-gap"></ion-item>
+				<ion-item ng-repeat="item in advance">
+			  		<div class="row padding_0">
+				    	<p class="col col-60 font_bold pblack">
+				    		{{item.gdTitle}}
+				    	</p>
+				    	<p class="col psize_08 text-right">{{item.gdEndDate}}共读结束</p>
+				    </div>
+				    <div class="booklist">
+					    <ul class="row">
+					    	<li class="col col-33" ng-repeat="items in item.gdBook">
+					    		<img ng-src="{{items.bookSltPath}}" />
+					    		<p class="text-center pblack">{{items.bookName}}</p>
+					    		<p class="text-center">{{items.bookAuthor}}</p>
+					    	</li>
+					    </ul>
+				    </div>
+			    </ion-item>
+			</ion-slide>
+		</ion-slide-box>
+  </ion-content>
+</ion-view>
+
+
+<!--查看签到弹窗-->
+		<div class="exploreSign" style="display: none;">
+			<span class="codeClose"  ng-click="codeClose()">X</span>
+			<h4>本期签到状况</h4>
+			<div id="calendar"></div>
+		</div>
+		<!--灰色遮罩层-->
+		<div class="masking" style="display: none;"></div>

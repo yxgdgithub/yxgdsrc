@@ -1,0 +1,53 @@
+# Server settings (ServerProperties)
+server:
+  port: 8080
+  #address: 192.168.1.106
+  address: 127.0.0.1
+  sessionTimeout: 30
+  contextPath: /subser
+
+  # Tomcat specifics
+  tomcat:
+    accessLogEnabled: false
+    protocolHeader: x-forwarded-proto
+    remoteIpHeader: x-forwarded-for
+    basedir:
+    backgroundProcessorDelay: 30 # secs
+    
+spring:
+    datasource:
+        name: test
+        url: jdbc:mysql://127.0.0.1:3306/testdb?characterEncoding=utf-8
+        username: yxgd
+        password: yxgd
+        # 使用druid数据源
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        filters: stat
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+    mvc:
+        view:
+            prefix: /templates/
+            suffix: .ftl
+    freemarker:
+        cache: false
+        request-context-attribute: request
+        
+mybatis: 
+    mapperLocations: classpath:com/mj/mmanage/mapper/*.xml
+    typeAliasesPackage: com.mj.mmanage.entity  
+
+application:
+  name: sb-ms-custdepl
+  version: 0.1-CUSTOMER

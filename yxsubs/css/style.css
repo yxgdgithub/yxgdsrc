@@ -1,0 +1,477 @@
+/* Empty. Add your own CSS if you like */
+
+a.my-tab-item {
+	color: rgb(0, 0, 0);
+}
+
+.padding_0 {
+	padding: 0;
+}
+
+.margintop_10{
+	margin-top: 10px;
+}
+
+.paddingtop_6 {
+	padding-top: 6px;
+}
+
+.font_bold {
+	font-weight: bold;
+}
+
+.item p.pblack {
+	color: black;
+}
+
+.item p.psize_08 {
+	font-size: 0.8em;
+}
+
+p.myReadCont {
+	width: 92%;
+	margin: 0 4%;
+	line-height: 25px;
+	text-indent: 24px;
+}
+
+h2 {
+	font-weight: bold;
+}
+
+.item-body h1,
+.item-body h2,
+.item-body h3,
+.item-body h4,
+.item-body h5,
+.item-body h6,
+.item-body p {
+	margin-top: 0;
+}
+
+.col {
+	padding: 0;
+}
+
+.slider {
+	height: 100%;
+}
+
+.box {
+	margin-bottom: 10%;
+}
+
+.slider-slide {
+	height: 90%;
+	color: #007AFF;
+	background-color: #fff;
+}
+
+.white {
+	font-size: 14px;
+	color: #FFFFFF;
+	line-height: 20px;
+	letter-spacing: 4px;
+}
+
+.line-height-18 {
+	line-height: 1.8em;
+}
+
+
+/*签到*/
+
+.myReadBtn {
+	width: 100px;
+	height: 28px;
+	line-height: 26px;
+	margin: 15px auto;
+	display: inherit;
+	text-align: center;
+	border: 1px solid #387ef5;
+	border-radius: 6px;
+}
+
+
+/*已签到*/
+
+.myReadBtnOn {
+	width: 100px;
+	height: 28px;
+	line-height: 26px;
+	margin: 15px auto;
+	display: inherit;
+	color: #b6b6b4;
+	text-align: center;
+	border: 1px solid #b6b6b4;
+	border-radius: 6px;
+}
+
+.sTab {
+	width: 100%;
+	height: 40px;
+	background: #fff;
+}
+
+.sTab:after {
+	content: "";
+	display: block;
+	clear: both;
+	list-style: none;
+	float: left;
+	margin: 0 10px;
+	background: #adcdef;
+	border-radius: 5px;
+}
+
+.sTab li {
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+}
+
+.sTab li a {
+	display: block;
+	color: #000;
+}
+
+.sTab li.active {
+	border-bottom: 2px solid #387ef5;
+}
+
+.sTab li.active a {
+	color: #387ef5;
+}
+
+.sContent:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.sContent li {
+	width: 96%;
+	margin: 0 2%;
+	background: #f7f7f7;
+	display: none;
+}
+
+.button_qian {
+	height: 30px;
+	text-align: center;
+	border: 1px solid #387ef5;
+	line-height: 26px;
+	color: #387ef5;
+	/*margin: 10px 10px 10px auto;*/
+	margin-top: 10px;
+	font-size: 12px;
+	border-radius: 6px;
+}
+
+.booklist {
+	margin-top: 20px;
+}
+
+.booklist li img {
+	width: 80%;
+	margin-left: 10%;
+}
+
+
+/*我的签到*/
+
+p.readTitle,
+p.myReadTitle {
+	font-weight: bold;
+	font-size: 18px;
+	text-align: center;
+}
+
+p.readTitle {
+	margin-bottom: 15px;
+}
+
+p.myReadTitle {
+	margin: 15px 0;
+}
+
+.avatarPre {
+	width: 50px;
+	border-radius: 28px;
+	vertical-align: middle;
+	float: left;
+}
+
+.nameTitle {
+	text-align: left;
+	padding-left: 10px;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+p.PerNm {
+	margin: 10px 0;
+}
+
+p.namePerTitle {
+	text-align: center;
+	font-weight: bold;
+	background: #f06441;
+	padding: 2px 10px;
+	border-radius: 14px;
+	color: #fff;
+	width: 74px;
+	height: 25px;
+	margin: 0 auto;
+}
+
+.leavelVip {
+	background: #f06441;
+	padding: 2px 10px;
+	border-radius: 14px;
+	color: #fff;
+	display: -webkit-inline-box;
+	font-size: 12px;
+	margin-left: 10px;
+}
+
+.sTitle {
+	text-align: left;
+	padding-left: 10px;
+	vertical-align:middle;
+}
+
+.myQRcode {
+	width: 80%;
+	margin: 0 10%;
+	padding: 15px 10px;
+	background: #fff;
+	display: none;
+	position: fixed;
+	top: 10%;
+	z-index: 3;
+}
+
+.masking {
+	width: 100%;
+	height: 100%;
+	background: #000;
+	filter: alpha(opacity=50);
+	-moz-opacity: 0.5;
+	-webkit-opacity: 0.5;
+	opacity: 0.5;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	display: none;
+	z-index: 2;
+}
+
+p.myToday {
+	font-size: 14px;
+	color: #666;
+	text-align: center;
+	margin-top: 6px;
+}
+
+.myToday span,
+.myBookFd span {
+	color: #387ef5;
+}
+
+.challenge {
+	text-align: center;
+	background: #000000;
+	padding: 3px 10px;
+	color: #fff;
+	width: 150px;
+	height: 40px;
+	vertical-align: middle;
+	margin: 12px auto 4px;
+	line-height: 35px;
+	border-radius: 10px;
+}
+
+p.myBookFd {
+	font-size: 16px;
+	text-align: center;
+	margin: 0 0 3px;
+}
+
+p.codeTitle {
+	line-height: 50px;
+	margin-left: 60px;
+}
+
+p.codeTitle span {
+	font-size: 18px;
+	color: #222222;
+}
+
+.myQRimgs {
+	margin: 0 auto;
+	width: 80px;
+	height: 100px;
+	display: block;
+}
+
+.myQRimgs img {
+	width: 80px;
+	height: 100px;
+}
+
+.myQRcodeScholl {
+	width: 108px;
+	height: 108px;
+	margin: 0 auto;
+}
+
+.myQRcodeScholl img {
+	width: 108px;
+	height: 108px;
+}
+
+.codeClose {
+	float: right;
+	font-size: 16px;
+	background: #fff;
+	width: 22px;
+	height: 22px;
+	border-radius: 32px;
+	text-align: center;
+	line-height: 19px;
+	color: #CDCFD4;
+	border: 1px solid #CDCFD4;
+}
+
+.QRtitle {
+	text-align: center;
+	margin: 30px 0 10px 0;
+	font-size: 20px;
+}
+
+.PerTitle {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.signAll p {
+	display: inline-block;
+}
+
+.signAll p span.hasSign {
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	border: 2px solid #89b6f3;
+	display: inline-block;
+}
+
+.signAll p span.notSign {
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	border: 2px solid #89b6f3;
+	display: inline-block;
+}
+
+#calendar {
+	background: #fff;
+	width: 96%;
+	margin: 0 2%;
+}
+#calendar1 {
+	background: #fff;
+	width: 96%;
+	margin: 0 2%;
+}
+
+
+.exploreSign {
+	width: 80%;
+	margin: 0 10%;
+	padding: 15px 10px;
+	background: #fff;
+	display: none;
+	position: fixed;
+	top: 22%;
+	z-index: 3;
+}
+
+.exploreSign h4 {
+	text-align: center;
+}
+
+/*add*/
+.tab-default {
+	border: 1px solid #f2f2f2;
+	padding: 6px 0;
+}
+
+.tab_select {
+	border-bottom: 1px solid #3e89f5;
+	box-shadow: 0 -3px 8px #c1d3f0 inset;
+}
+
+.arrow-top {
+	position: absolute;
+	width: 0;
+	height: 0;
+	top: 20px;
+	border: 1px solid #3E89F5;
+	border-right-color: transparent;
+	border-left-color: transparent;
+	border-top-color: transparent;
+}
+
+.arrow-top:after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 12px solid #fff;
+	right: -12px;
+	bottom: -13px;
+	border-right-color: transparent;
+	border-left-color: transparent;
+	border-top-color: transparent;
+}
+
+.colockbox {
+	width: 283px;
+	height: 76px;
+	margin: 20px auto;
+	background: url(../img/colockbg.png) no-repeat;
+}
+
+.colockbox span {
+	float: left;
+	display: block;
+	width: 58px;
+	height: 48px;
+	line-height: 48px;
+	font-size: 26px;
+	text-align: center;
+	color: #ffffff;
+	margin: 0 17px 0 0;
+}
+
+.colockbox span.second {
+	margin: 0;
+}
+
+.ClassyCountdownDemo {
+	margin: 0 auto 30px auto;
+	max-width: 800px;
+	width: calc(100%);
+	padding: 30px;
+	display: block
+}
+
+#countdown10 {
+	background: #3498db
+}
+.topicTitle{
+	letter-spacing: 2px;
+}
+.divcss5 img{width:400px}

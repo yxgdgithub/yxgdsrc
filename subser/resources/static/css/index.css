@@ -1,0 +1,47 @@
+.navbar-fixed-top,.navbar-fixed-bottom {
+	position: relative;
+}
+
+.layout {
+	background-color: #f6f6f6;
+	/* padding-top : 100px !important; */
+}
+
+.panel-self {
+	border-color: #ddd !important;
+	text-align: center;
+}
+
+.panel-self .panel-heading {
+	padding: 0px 0px 20px 0px;
+}
+
+.panel-self .panel-body {
+	background-color: #eeeeee;
+	border-radius: 5px;
+}
+
+.panel-self .panel-button {
+	padding-bottom: 35px;
+}
+
+.panel-self .panel-title {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.panel-self .panel-body:HOVER {
+	background-color: #fff;
+	border-radius: 4px;
+}
+
+.icon-users {
+	font-size: 18px !important;
+	margin-left: 3px !important;
+}
+
+@media ( max-width :767px) {
+	h3 {
+		padding-top: 70px;
+	}
+}

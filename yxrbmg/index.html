@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js" data-ng-app="MetronicApp"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js" data-ng-app="MetronicApp"> <![endif]-->
+<html lang="en" data-ng-app="MetronicApp">
+    <!-- BEGIN HEAD -->
+    <head>
+        <title data-ng-bind="'宇信共读管理系统 | ' + $state.current.data.pageTitle"></title>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <!-- BEGIN 字体相关 -->
+        <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="libs/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="libs/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+        <!-- END 字体相关 -->
+        
+        <link href="libs/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />
+        <link href="libs/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />
+		
+        <!-- BEGIN 翻页 -->
+        <link href="libs/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+        <link href="libs/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+        <!-- END 翻页 -->
+        <!-- BEGIN 上传文件 -->
+        <link href="libs/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
+        <!-- END 上传文件 -->
+        <!-- BEGIN DYMANICLY LOADED CSS FILES(all plugin and page related styles must be loaded between GLOBAL and THEME css files ) -->
+        <link id="ng_load_plugins_before" />
+        <link href="libs/public-css/yxReading.css" rel="stylesheet" type="text/css" />
+        <!-- END DYMANICLY LOADED CSS FILES -->
+        <!-- BEGIN THEME STYLES -->
+        <!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
+        <link href="libs/public-css/components.css" id="style_components" rel="stylesheet" type="text/css" />
+        <link href="libs/public-css/plugins.min.css" rel="stylesheet" type="text/css" />
+        <link href="libs/public-css/layout.min.css" rel="stylesheet" type="text/css" />
+        <link href="libs/public-css/grey.css" rel="stylesheet" type="text/css" id="style_color" />
+        <link href="libs/public-css/custom.min.css" rel="stylesheet" type="text/css" />
+        <!--表单验证-->
+        <link rel="stylesheet" type="text/css" href="libs/ladda-themeless.min.css"/>
+        
+        <link rel="stylesheet" type="text/css" href="css/main.css"/>
+        <!-- END THEME STYLES -->
+        <link rel="shortcut icon" href="favicon.ico" />
+    </head>
+    <!-- END HEAD -->
+    <!-- BEGIN BODY -->
+    <body ng-controller="AppController" class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-closed-hide-logo page-on-load" ng-class="{'page-sidebar-closed': settings.layout.pageSidebarClosed}" id="bodyContentId">
+        <!-- BEGIN 响应菜单按钮 -->
+        <div ng-spinner-bar class="page-spinner-bar">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+        <!-- END 响应菜单按钮 -->
+        <!-- BEGIN HEADER -->
+        <div data-ng-include="'views/templates/header.html'" data-ng-controller="HeaderController" class="page-header navbar navbar-fixed-top"></div>
+        <!-- END HEADER -->
+        <div class="clearfix"></div> 
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container">
+            <div class="">
+                <!-- BEGIN 左侧菜单 -->
+                <div data-ng-include="'views/templates/sidebar.html'" data-ng-controller="SidebarController" class="page-sidebar-wrapper"></div>
+                <!-- END 左侧菜单 -->
+                <div class="page-content-wrapper">
+                    <div class="page-content">
+                        <div ui-view class="fade-in-up"></div>
+                    </div>
+                </div>
+                <!-- BEGIN QUICK SIDEBAR -->
+                <a href="javascript:;" class="page-quick-sidebar-toggler">
+                    <i class="icon-login"></i>
+                </a>
+                <div data-ng-include="'views/templates/quick-sidebar.html'" data-ng-controller="QuickSidebarController" class="page-quick-sidebar-wrapper"></div>
+                <!-- END QUICK SIDEBAR -->
+            </div>
+            <!-- BEGIN FOOTER -->
+            <div data-ng-include="'views/templates/footer.html'" data-ng-controller="FooterController" class="page-footer"> </div>
+            <!-- END FOOTER -->
+        </div>
+        <!-- END CONTAINER -->
+        <div class="quick-nav-overlay"></div>
+        <!-- END QUICK NAV -->
+        <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+        <!-- BEGIN CORE JQUERY PLUGINS -->
+        <!--[if lt IE 9]>
+			<script src="libs/IE9/respond.min.js"></script>
+			<script src="libs/IE9/excanvas.min.js"></script> 
+		<![endif]-->
+        <script src="libs/jquery.min.js" type="text/javascript"></script>
+        <script src="libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="libs/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+        <script src="libs/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+        <script src="libs/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="libs/js.cookie.min.js" type="text/javascript"></script>
+        <script src="libs/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+        <script src="libs/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript" charset="utf-8"></script>
+        <script src="libs/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript" charset="utf-8"></script>
+        
+        <!-- END CORE JQUERY PLUGINS -->
+        <!-- BEGIN CORE ANGULARJS PLUGINS -->
+        <script src="libs/angularjs/angular.min.js" type="text/javascript"></script>
+        <script src="libs/angularjs/angular-sanitize.min.js" type="text/javascript"></script>
+        <script src="libs/angularjs/angular-touch.min.js" type="text/javascript"></script>
+        <script src="libs/angularjs/plugins/angular-ui-router.min.js" type="text/javascript"></script>
+      	<script src="libs/angularjs/plugins/ocLazyLoad.min.js" type="text/javascript"></script>
+        <script src="libs/angularjs/plugins/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
+        <!-- END CORE ANGULARJS PLUGINS -->
+        <!-- BEGIN PAGE LEVEL PLUGINS -->
+        <script src="libs/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+        <!-- END PAGE LEVEL PLUGINS -->
+        
+        <!--FORM CHECK BEGIN-->
+        <script src="libs/form-verifty/jcs-auto-validate.js" type="text/javascript" charset="utf-8"></script>
+        <script src="libs/form-verifty/angular-sanitize.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="libs/form-verifty/angular-localize.min.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script src="libs/form-verifty/spin.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="libs/form-verifty/ladda.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="libs/form-verifty/angular-ladda.min.js" type="text/javascript" charset="utf-8"></script>
+        <!--FORM CHECK END-->
+        
+        
+        <!-- BEGIN APP LEVEL ANGULARJS SCRIPTS -->
+        <script src="js/main.js" type="text/javascript"></script>
+        <script src="js/directives.js" type="text/javascript"></script>
+        <!-- END APP LEVEL ANGULARJS SCRIPTS -->
+        <!-- BEGIN APP LEVEL JQUERY SCRIPTS -->
+		<script src="libs/app.min.js" type="text/javascript"></script>
+        <script src="libs/layout.min.js" type="text/javascript"></script>
+        <script src="libs/quick-sidebar.min.js" type="text/javascript"></script>
+        <script src="libs/quick-nav.min.js" type="text/javascript"></script>
+        <script src="libs/demo.js" type="text/javascript"></script>
+        <script src="libs/table-datatables-managed.js" type="text/javascript"></script>
+        <script src="libs/sweetalert.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+        <!-- END APP LEVEL JQUERY SCRIPTS -->
+        <!-- END JAVASCRIPTS -->
+    </body>
+    <!-- END BODY -->
+</html>

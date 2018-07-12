@@ -1,0 +1,20 @@
+<ion-view view-title="宇信共读">
+  <ion-content class="setting">
+		<ion-list>
+			<ion-item class="item-divider item-gap">
+			</ion-item>
+			<ion-item class="login" on-hold="onHoldLogin()" ng-click="login()" ng-if="!loginName">
+				<img src="img/commentfailure.png" class="avatar">
+				<p class="PerNm">李铁柱</p>
+				<p class="namePerTitle">VIP学员</p>
+				<p class="PerTitle">宇信共读，让成长不在孤单。</p>
+				<ion-spinner icon="ripple" ng-if="processing"></ion-spinner>
+			</ion-item>
+			<ion-item class="item-divider item-gap"></ion-item>
+			<ion-item><i class="icon ion-ios-person"></i>&nbsp;&nbsp;个人阅历<span class="item-note icon ion-ios-arrow-right"></span></ion-item>
+			<ion-item><i class="icon ion-clipboard"></i>&nbsp;&nbsp;交易记录<span class="item-note icon ion-ios-arrow-right"></span></ion-item>
+			<ion-item class="item-divider item-gap"></ion-item>
+			<ion-item><i class="icon ion-card"></i>&nbsp;&nbsp;福利卡券<span class="item-note icon ion-ios-arrow-right"></span></ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>

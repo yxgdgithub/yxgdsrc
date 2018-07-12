@@ -1,0 +1,810 @@
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<link href="libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+<link href="libs/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+	<ul class="page-breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<a ui-sref="dashboard">首页</a>
+			<i class="fa fa-angle-right"></i>
+		</li>
+		<li>
+			<a ui-sref="#">图书信息维护</a>
+			<i class="fa fa-angle-right"></i>
+		</li>
+		<li>
+			<a ui-sref="add_newbooks">图书新增</a>
+		</li>
+	</ul>
+
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light " id="form_wizard_1" style="">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class=" icon-layers font-red"></i>
+					<span class="caption-subject font-red bold uppercase"> 图书信息新增 -
+                        <span class="step-title"> 第 1 步，共 4 步 </span>
+					</span>
+				</div>
+				<div class="actions">
+					<!--移动到修改页面，此页面不需要-->
+					<!--<a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                        <i class="icon-trash"></i>
+                    </a>-->
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<div class="form-horizontal">
+					<div class="form-wizard">
+						<div class="form-body">
+							<ul class="nav nav-pills nav-justified steps">
+								<li>
+									<a href="#tab1" data-toggle="tab" class="step">
+										<span class="number"> 1 </span>
+										<span class="desc"><i class="fa fa-check"></i> 基本信息 </span>
+									</a>
+								</li>
+								<li>
+									<a href="#tab2" data-toggle="tab" class="step">
+										<span class="number"> 2 </span>
+										<span class="desc"><i class="fa fa-check"></i> 图书介绍 </span>
+									</a>
+								</li>
+								<li>
+									<a href="#tab3" data-toggle="tab" class="step active">
+										<span class="number"> 3 </span>
+										<span class="desc"><i class="fa fa-check"></i> 图书上传 </span>
+									</a>
+								</li>
+								<li>
+									<a href="#tab4" data-toggle="tab" class="step">
+										<span class="number"> 4 </span>
+										<span class="desc"><i class="fa fa-check"></i> 音频上传（可选） </span>
+									</a>
+								</li>
+							</ul>
+							<div id="bar" class="progress progress-striped" role="progressbar">
+								<div class="progress-bar progress-bar-success"> </div>
+							</div>
+							<div class="tab-content">
+								<div class="alert alert-danger display-none">
+									<button class="close" data-dismiss="alert"></button> You have some form errors. Please check below. </div>
+								<div class="alert alert-success display-none">
+									<button class="close" data-dismiss="alert"></button> Your form validation is successful! </div>
+								<!-- 图书基本信息 -->
+								<form class="tab-pane active" id="tab1" method="post">
+									<h3 class="block">请填写图书基本信息</h3>
+									<input type="text" name="bookId" value="" class="hidden bookId" />
+									<div class="form-group">
+										<label class="control-label col-md-3" for="bookNm">图书名称：</label>
+										<div class="col-md-4">
+											<input class="form-control" id="bookNm" type="text" name="bookName" required="required" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3" for="bookAu">图书作者：</label>
+										<div class="col-md-4">
+											<input class="form-control" id="bookAu" type="text" name="bookAuthor" required="required" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3" for="bookTag">图书标签：</label>
+										<div class="col-md-4">
+											<input class="form-control" id="bookTag" type="text" name="bookTag" required="required" />
+											<!--<select class="col-md-4 form-control" id="bookTag" name="bookTag">
+					                            <option>理财</option>
+					                            <option>金融</option>
+					                            <option>投资</option>
+					                        </select>-->
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">图书封面：</label>
+										<div class="col-md-9">
+											<div class="fileinput fileinput-new" data-provides="fileinput">
+												<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"> </div>
+												<div class="clearfix margin-bottom-10 fileinput-new" style="color: red;display: none;" id="chooseErr">
+													请选择一张图片作为图书封面
+												</div>
+												<div>
+													<span class="btn green btn-outline btn-file">
+			                                        <span class="fileinput-new" id="chooseImg">选择图片</span>
+													<span class="fileinput-exists">更改</span>
+													<input type="file" name="bookImg" id="imgFile">
+													</span>
+													<a href="javascript:;" class="btn green fileinput-exists" data-dismiss="fileinput">删除</a>
+												</div>
+											</div>
+											
+											<div class="clearfix margin-top-10">
+												<span class="label label-success">温馨提示</span> 仅支持IE10+, FF3.6+, Safari6.0+, Chrome6.0+ and Opera11.1+
+											</div>
+										</div>
+									</div>
+								</form>
+								<!-- 图书介绍 -->
+								<form class="tab-pane" id="tab2">
+									<h3 class="block">建议录入作者介绍、内容简介、原书金句</h3>
+									<input type="text" name="bookId" value="" class="hidden bookId" />
+									<div class="form-group">
+										<label class="control-label col-md-3">图书详情：</label>
+										<div class="col-md-4">
+											<textarea class="form-control" id="editor2" name="editor2" rows="6" data-error-container="#editor2_error"></textarea>
+											<div id="editor2_error"></div>
+										</div>
+									</div>
+								</form>
+								<!-- 上传图书 -->
+								<form class="tab-pane" id="tab3">
+									<h3 class="block">请选择文本上传</h3>
+									<div class="row" ng-controller="FileUploadCtrl" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+										<input type="text" name="bookId" class="hidden bookId" />
+										<div class="col-md-4">
+											<!-- BEGIN: ACCORDION DEMO -->
+											<div class="portlet light">
+												<div class="portlet-title">
+													<div class="caption font-green-sharp">
+														<i class="icon-settings font-green-sharp"></i>
+														<span class="caption-subject bold uppercase">选择文件</span>
+														<span class="caption-helper hide"></span>
+													</div>
+												</div>
+												<div class="portlet-body">
+													<div ng-show="uploader.isHTML5">
+														<div nv-file-drop="" uploader="uploader" options="{ url: '/book/file/upload'}">
+															<div nv-file-over="" uploader="uploader" over-class="file-drop-zone-over" class="file-drop-zone margin-bottom-20">自定义上传区域</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- END: ACCORDION DEMO -->
+										</div>
+										<div class="col-md-8">
+											<!-- BEGIN: ACCORDION DEMO -->
+											<div class="portlet light">
+												<div class="portlet-title">
+													<div class="caption font-green-sharp">
+														<i class="icon-settings font-green-sharp"></i>
+														<span class="caption-subject bold uppercase">上传队列</span>
+														<span class="caption-helper">队列长度: {{ uploader.queue.length + uploader.modiList.length}}</span>
+													</div>
+													<div class="actions">
+														<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="#" data-original-title="" title=""> </a>
+													</div>
+												</div>
+												<div class="portlet-body">
+													<div class="table-scrollable table-scrollable-borderless">
+														<table class="table table-hover table-light" id="fileTab">
+															<thead>
+																<tr class="uppercase">
+																	<th>序号</th>
+																	<th>名称</th>
+																	<th ng-show="uploader.isHTML5">大小</th>
+																	<th ng-show="uploader.isHTML5">进度</th>
+																	<th>状态</th>
+																	<th>操作</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr ng-repeat="item in uploader.modiList">
+																	<td width="10%" style="vertical-align: middle;text-align: center;">
+																		<input name="bookChapter" style="width: 40px;" ng-model="item.book.bookChapter" class="form-group" value="{{trNum+1}}"/>
+																	</td>
+																	<td width="30%">
+																		<strong>{{ item.file.name }}</strong>
+																	</td>
+																	<td width="10%" ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+																	<td width="10%" ng-show="uploader.isHTML5">
+																		<div class="progress progress-sm" style="margin-bottom: 0;">
+																			<div class="progress-bar progress-bar-info" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+																		</div>
+																	</td>
+																	<td width="10%" class="text-center">
+																		<span ng-show="item.isSuccess" class="text-success">
+									                                        <i class="glyphicon glyphicon-ok"></i>
+									                                    </span>
+																		<span ng-show="item.isCancel" class="text-info">
+									                                        <i class="glyphicon glyphicon-ban-circle"></i>
+									                                    </span>
+																		<span ng-show="item.isError" class="text-danger">
+									                                        <i class="glyphicon glyphicon-remove"></i>
+									                                    </span>
+																	</td>
+																	<td nowrap width="20%">
+																		<button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+									                                        <span class="glyphicon glyphicon-upload"></span> 上传 </button>
+																		<button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+									                                        <span class="glyphicon glyphicon-ban-circle"></span> 取消 </button>
+																		<button type="button" data-value="{{$index}}" class="btn btn-danger btn-xs" ng-click="removeItem($event,item)">
+									                                        <span class="glyphicon glyphicon-trash"></span> 删除 </button>
+																	</td>
+																</tr>
+																<tr ng-repeat="item in uploader.queue">
+																	<td width="10%" style="vertical-align: middle;text-align: center;">
+																		<input name="bookChapter" style="width: 40px;" ng-model="item.book.bookChapter" class="form-group" value="{{trNum+1}}"/>
+																	</td>
+																	<td width="30%">
+																		<strong>{{ item.file.name }}</strong>
+																	</td>
+																	<td width="10%" ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+																	<td width="10%" ng-show="uploader.isHTML5">
+																		<div class="progress progress-sm" style="margin-bottom: 0;">
+																			<div class="progress-bar progress-bar-info" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+																		</div>
+																	</td>
+																	<td width="10%" class="text-center">
+																		<span ng-show="item.isSuccess" class="text-success">
+									                                        <i class="glyphicon glyphicon-ok"></i>
+									                                    </span>
+																		<span ng-show="item.isCancel" class="text-info">
+									                                        <i class="glyphicon glyphicon-ban-circle"></i>
+									                                    </span>
+																		<span ng-show="item.isError" class="text-danger">
+									                                        <i class="glyphicon glyphicon-remove"></i>
+									                                    </span>
+																	</td>
+																	<td nowrap width="20%">
+																		<button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+									                                        <span class="glyphicon glyphicon-upload"></span> 上传 </button>
+																		<button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+									                                        <span class="glyphicon glyphicon-ban-circle"></span> 取消 </button>
+																		<button type="button" class="btn btn-danger btn-xs" ng-click="removeItem($event,item)">
+									                                        <span class="glyphicon glyphicon-trash"></span> 删除 </button>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div>
+														<p>队列进度:</p>
+														<div class="progress progress-sm" style="">
+															<div class="progress-bar progress-bar-info" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+														</div>
+													</div>
+													<button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+									                    <span class="glyphicon glyphicon-upload"></span> 全部上传 </button>
+													<button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+									                    <span class="glyphicon glyphicon-ban-circle"></span> 全部取消 </button>
+													<button type="button" class="btn btn-danger btn-s" ng-click="removeAllItem()" ng-disabled="!uploader.queue.length && !uploader.modiList.length">
+									                    <span class="glyphicon glyphicon-trash"></span> 全部删除 </button>
+									                <button type="button" class="btn btn-info btn-s" ng-click="" ng-disabled="uploader.queue.length == 0? true :uploader.getNotUploadedItems().length">
+									                    <span class="glyphicon glyphicon-file"></span> 保存序号 </button>
+												</div>
+											</div>
+											<!-- END: ACCORDION DEMO -->
+										</div>
+									</div>
+								</form>
+								<!-- 上传音频 -->
+								<form class="tab-pane" id="tab4">
+									<h3 class="block">请选择音频文件进行上传</h3>
+									<div class="row" ng-controller="AudioFileCtrl" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+										<input type="text" name="bookId" class="hidden bookId" />
+										<div class="col-md-4">
+											<!-- BEGIN: ACCORDION DEMO -->
+											<div class="portlet light">
+												<div class="portlet-title">
+													<div class="caption font-green-sharp">
+														<i class="icon-settings font-green-sharp"></i>
+														<span class="caption-subject bold uppercase">选择文件</span>
+														<span class="caption-helper hide"></span>
+													</div>
+												</div>
+												<div class="portlet-body">
+													<div ng-show="uploader.isHTML5">
+														<!-- 3. nv-file-over uploader="link" over-class="className" -->
+														<!--<div class="file-drop-zone margin-bottom-20" nv-file-over="" uploader="uploader" over-class="file-drop-zone-over">将文件拖拽到此区域</div>-->
+														<!-- Example: nv-file-drop="" uploader="{Object}" options="{Object}" filters="{String}" -->
+														<div nv-file-drop="" uploader="uploader" options="{ url: '/book/file/upload'}">
+															<div nv-file-over="" uploader="uploader" over-class="file-drop-zone-over" class="file-drop-zone margin-bottom-20">自定义上传区域</div>
+														</div>
+													</div>
+													<!--<div>
+														 Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" 批量上传
+														<input type="file" nv-file-select="" uploader="uploader" multiple />
+													</div>-->
+												</div>
+											</div>
+											<!-- END: ACCORDION DEMO -->
+										</div>
+										<div class="col-md-8">
+											<!-- BEGIN: ACCORDION DEMO -->
+											<div class="portlet light">
+												<div class="portlet-title">
+													<div class="caption font-green-sharp">
+														<i class="icon-settings font-green-sharp"></i>
+														<span class="caption-subject bold uppercase">上传队列</span>
+														<span class="caption-helper">队列长度: {{ uploader.queue.length + uploader.modiList.length}}}</span>
+													</div>
+													<div class="actions">
+														<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="#" data-original-title="" title=""> </a>
+													</div>
+												</div>
+												<div class="portlet-body">
+													<div class="table-scrollable table-scrollable-borderless">
+														<table class="table table-hover table-light" id="fileMusic">
+															<thead>
+																<tr class="uppercase">
+																	<th>序号</th>
+																	<th>名称</th>
+																	<th ng-show="uploader.isHTML5">大小</th>
+																	<th ng-show="uploader.isHTML5">进度</th>
+																	<th>状态</th>
+																	<th>操作</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr ng-repeat="item in uploader.modiList">
+																	<td width="10%" style="vertical-align: middle;text-align: center;">
+																		<input name="bookChapter" style="width: 40px;" ng-model="item.book.bookChapter" class="form-group" value="{{trNum+1}}"/>
+																	</td>
+																	<td width="30%">
+																		<strong>{{ item.file.name }}</strong>
+																	</td>
+																	<td width="10%" ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+																	<td width="10%" ng-show="uploader.isHTML5">
+																		<div class="progress progress-sm" style="margin-bottom: 0;">
+																			<div class="progress-bar progress-bar-info" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+																		</div>
+																	</td>
+																	<td width="10%" class="text-center">
+																		<span ng-show="item.isSuccess" class="text-success">
+									                                        <i class="glyphicon glyphicon-ok"></i>
+									                                    </span>
+																		<span ng-show="item.isCancel" class="text-info">
+									                                        <i class="glyphicon glyphicon-ban-circle"></i>
+									                                    </span>
+																		<span ng-show="item.isError" class="text-danger">
+									                                        <i class="glyphicon glyphicon-remove"></i>
+									                                    </span>
+																	</td>
+																	<td nowrap width="20%">
+																		<button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+									                                        <span class="glyphicon glyphicon-upload"></span> 上传 </button>
+																		<button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+									                                        <span class="glyphicon glyphicon-ban-circle"></span> 取消 </button>
+																		<button type="button" data-value="{{$index}}" class="btn btn-danger btn-xs" ng-click="removeItem($event,item)">
+									                                        <span class="glyphicon glyphicon-trash"></span> 删除 </button>
+																	</td>
+																</tr>
+																<tr ng-repeat="item in uploader.queue">
+																	<td width="10%" style="vertical-align: middle;text-align: center;">
+																		<input name="bookChapter" style="width: 40px;" ng-model="item.book.bookChapter" class="form-group" value="{{trNum+1}}" disabled="disabled"/>
+																	</td>
+																	<td width="30%">
+																		<strong>{{ item.file.name }}</strong>
+																	</td>
+																	<td width="10%" ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+																	<td width="10%" ng-show="uploader.isHTML5">
+																		<div class="progress progress-sm" style="margin-bottom: 0;">
+																			<div class="progress-bar progress-bar-info" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+																		</div>
+																	</td>
+																	<td width="10%" class="text-center">
+																		<span ng-show="item.isSuccess" class="text-success">
+									                                        <i class="glyphicon glyphicon-ok"></i>
+									                                    </span>
+																		<span ng-show="item.isCancel" class="text-info">
+									                                        <i class="glyphicon glyphicon-ban-circle"></i>
+									                                    </span>
+																		<span ng-show="item.isError" class="text-danger">
+									                                        <i class="glyphicon glyphicon-remove"></i>
+									                                    </span>
+																	</td>
+																	<td nowrap width="20%">
+																		<button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+									                                        <span class="glyphicon glyphicon-upload"></span> 上传 </button>
+																		<button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+									                                        <span class="glyphicon glyphicon-ban-circle"></span> 取消 </button>
+																		<button type="button" class="btn btn-danger btn-xs" ng-click="removeItem($event,item)">
+									                                        <span class="glyphicon glyphicon-trash"></span> 删除 </button>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div>
+														<p>队列进度:</p>
+														<div class="progress progress-sm" style="">
+															<div class="progress-bar progress-bar-info" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+														</div>
+													</div>
+													<button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+									                    <span class="glyphicon glyphicon-upload"></span> 全部上传 </button>
+													<button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+									                    <span class="glyphicon glyphicon-ban-circle"></span> 全部取消 </button>
+													<button type="button" class="btn btn-danger btn-s" ng-click="removeAllItem()" ng-disabled="!uploader.queue.length && !uploader.modiList.length">
+									                    <span class="glyphicon glyphicon-trash"></span> 全部删除 </button>
+									                <button type="button" class="btn btn-info btn-s" ng-click="" ng-disabled="!uploader.queue.length">
+									                    <span class="glyphicon glyphicon-file"></span> 保存序号 </button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="form-actions">
+							<div class="row">
+								<div class="col-md-offset-5 col-md-7">
+									<a href="javascript:;" class="btn default button-previous">
+										<i class="fa fa-angle-left"></i> 后退 </a>
+									<a href="javascript:;" class="btn btn-outline green button-next"> 下一步
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+									<a href="javascript:;" class="btn green button-submit"> 完成
+                                        <i class="fa fa-check"></i>
+                                    </a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="libs/select2/js/select2.full.min.js" type="text/javascript"></script>
+<script src="libs/jquery-validation/js/jquery.validate.js" type="text/javascript"></script>
+<script src="libs/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+<script src="libs/bootstrap-wizard/jquery.bootstrap.wizard.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN THEME GLOBAL SCRIPTS -->
+<!--<script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>-->
+<!-- END THEME GLOBAL SCRIPTS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="libs/form-wizard.js" type="text/javascript"></script>
+<script type="text/javascript">
+	CKEDITOR.replace('editor2', {
+		on: {
+			// Check for availability of corresponding plugins.
+			pluginsLoaded: function(evt) {
+				var doc = CKEDITOR.document,
+					ed = evt.editor;
+				if (!ed.getCommand('bold')) doc.getById('exec-bold').hide();
+				if (!ed.getCommand('link')) doc.getById('exec-link').hide();
+			}
+		}
+	});
+	/*FormWizard.init();*/
+</script>
+<script>
+	
+    var bookInfo = JSON.parse(window.localStorage.getItem("bookInfo")) || "";
+	function FileUploadCtrl($scope, FileUploader) {
+	    if(bookInfo != ""){
+	    	window.localStorage.removeItem("bookInfo");
+	    	var _url = "book/file/"+bookInfo.bookId+"/01";
+			main.ajax({
+	    		"_url":_url,
+	    		"_type":"post",
+	    		"_back":function(res){
+	    			var data = res.content;
+	    			var fileList = [];
+	    			for(var i=0;i<data.length;i++){
+	    				fileList.push({
+	    					book:{
+	    						"bookChapter":data[i].bookChapter
+	    					},
+	    					file:{
+	    						"name":data[i].fileName,
+	    						"size":data[i].fileSize
+	    					},
+	    					"fileId":data[i].fileId,
+    						"isSuccess":true,
+    						"isCancel":false,
+    						"isUploading":false,
+	    					progress:100,
+	    					remove:function(index){
+	    						uploader.modiList.splice(index,1);
+	    					}
+	    				})
+	    			}
+	    			uploader.modiList = fileList;
+	    			$scope.$apply();
+	    		}
+	    	})
+	    }
+		
+		$scope.trNum = 0;
+		var uploader = $scope.uploader = new FileUploader({
+			url: 'book/file/upload',
+			alias: "file"
+		});
+		// FILTERS
+		uploader.filters.push({
+			name: 'customFilter',
+			fn: function(item /*{File|FileLikeObject}*/ , options) {
+				return this.queue.length < 10;
+			}
+		});
+		
+		var fileIndex = 1
+			// CALLBACKS
+		uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/ , filter, options) {
+			console.info('onWhenAddingFileFailed', item, filter, options);
+		};
+		uploader.onAfterAddingFile = function(fileItem) {
+			fileItem.book = {
+				"bookChapter": fileIndex++
+			};
+			console.info('onAfterAddingFile', fileItem);
+		};
+		uploader.onAfterAddingAll = function(addedFileItems) {
+			console.info('onAfterAddingAll', addedFileItems);
+		};
+		uploader.onBeforeUploadItem = function(item) {
+			item.formData = [{
+				"bookId": $("#tab3").find(".bookId").val(),
+				"bookChapter": item.book.bookChapter,
+				"fileType": "01"
+			}]
+		};
+		uploader.onProgressItem = function(fileItem, progress) {
+			console.info(fileItem.formData)
+			console.info('onProgressItem', fileItem, progress);
+		};
+		uploader.onProgressAll = function(progress) {
+			console.info('onProgressAll', progress);
+		};
+		uploader.onSuccessItem = function(fileItem, response, status, headers) {
+			fileItem.fileId = response.content;
+			//serialModi();
+			console.info('onSuccessItem', fileItem, response, status, headers);
+		};
+		uploader.onErrorItem = function(fileItem, response, status, headers) {
+			console.info('onErrorItem', fileItem, response, status, headers);
+		};
+		uploader.onCancelItem = function(fileItem, response, status, headers) {
+			console.info('onCancelItem', fileItem, response, status, headers);
+		};
+		uploader.onCompleteItem = function(fileItem, response, status, headers) {
+			console.info('onCompleteItem', fileItem, response, status, headers);
+		};
+		uploader.onCompleteAll = function() {
+			console.info('onCompleteAll');
+		};
+		//console.info('uploader', uploader);
+		
+		$scope.removeItem = function($event,item){
+			var index = $($event.target).attr("data-value");
+			if(item.fileId != "" && item.fileId != undefined && item.fileId != null){
+				var data = {
+    				"bookId":$("#tab3").find(".bookId").val(),
+    				"fileType":"01",
+	        		"fileId":item.fileId
+	        	}
+    			var _url = "book/file/remove";
+				main.ajax({
+	        		"_url":_url,
+	        		"_type":"post",
+	        		"_data":data,
+	        		"sync": false,
+	        		"_back":function(res){
+	        			if(index){
+	        				item.remove(index);	
+	        			}else{
+	        				item.remove();
+	        			}
+	        			realign();
+	        		}
+	        	})
+			}else{
+				item.remove()
+				realign();
+			}
+		}
+		$scope.removeAllItem = function(){
+			fileIndex = 1;
+			data = {
+				"bookId":$("#tab3").find(".bookId").val(),
+				"fileType": "01",
+				"fileId":""
+        	}
+			_url = "book/file/remove";
+			main.ajax({
+        		"_url":_url,
+        		"_type":"post",
+        		"_data":data,
+        		"sync":false,
+        		"_back":function(res){
+        			uploader.modiList = [];
+        			uploader.clearQueue()
+        		}
+        	})
+		}
+		
+		function realign(){
+			for(var i=0;i<uploader.queue.length;i++){
+				uploader.queue[i].book = {
+					"bookChapter": i+1
+				}
+			}
+		}
+		
+		function serialModi(){
+			if(uploader.queue.length == 0){
+				$("#fileTab").find("input").attr("disabled","disabled");
+			}else{
+				if(uploader.getNotUploadedItems().length==0){
+					$("#fileTab").find("input").removeAttr("disabled");
+				}else{
+					$("#fileTab").find("input").attr("disabled","disabled");
+				}
+			}
+		}
+	};
+	
+	
+	function AudioFileCtrl($scope, FileUploader) {
+		$scope.trNum = 0;
+		var uploader = $scope.uploader = new FileUploader({
+			url: 'book/file/upload',
+			alias: "file"
+		});
+		// FILTERS
+		uploader.filters.push({
+			name: 'customFilter',
+			fn: function(item /*{File|FileLikeObject}*/ , options) {
+				return this.queue.length < 10;
+			}
+		});
+		
+		if(bookInfo != ""){
+	    	window.localStorage.removeItem("bookInfo");
+	    	var _url = "book/file/"+bookInfo.bookId+"/02";
+			main.ajax({
+	    		"_url":_url,
+	    		"_type":"post",
+	    		"_back":function(res){
+	    			var data = res.content;
+	    			var fileList = [];
+	    			for(var i=0;i<data.length;i++){
+	    				fileList.push({
+	    					book:{
+	    						"bookChapter":data[i].bookChapter
+	    					},
+	    					file:{
+	    						"name":data[i].fileName,
+	    						"size":data[i].fileSize
+	    					},
+	    					"fileId":data[i].fileId,
+    						"isSuccess":true,
+    						"isCancel":false,
+    						"isUploading":false,
+	    					progress:100,
+	    					remove:function(index){
+	    						uploader.modiList.splice(index,1);
+	    					}
+	    				})
+	    			}
+	    			uploader.modiList = fileList;
+	    			$scope.$apply();
+	    		}
+	    	})
+	    }
+		
+		var fileIndex = 1
+			// CALLBACKS
+		uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/ , filter, options) {
+			console.info('onWhenAddingFileFailed', item, filter, options);
+		};
+		uploader.onAfterAddingFile = function(fileItem) {
+			fileItem.book = {
+				"bookChapter": fileIndex++
+			};
+			console.info('onAfterAddingFile', fileItem);
+		};
+		uploader.onAfterAddingAll = function(addedFileItems) {
+			console.info('onAfterAddingAll', addedFileItems);
+		};
+		uploader.onBeforeUploadItem = function(item) {
+			item.formData = [{
+				"bookId": $("#tab3").find(".bookId").val(),
+				"bookChapter": item.book.bookChapter,
+				"fileType": "02"
+			}]
+		};
+		uploader.onProgressItem = function(fileItem, progress) {
+			console.info(fileItem.formData)
+			console.info('onProgressItem', fileItem, progress);
+		};
+		uploader.onProgressAll = function(progress) {
+			console.info('onProgressAll', progress);
+		};
+		uploader.onSuccessItem = function(fileItem, response, status, headers) {
+			fileItem.fileId = response.content;
+			//serialMusic();
+			console.info('onSuccessItem', fileItem, response, status, headers);
+		};
+		uploader.onErrorItem = function(fileItem, response, status, headers) {
+			console.info('onErrorItem', fileItem, response, status, headers);
+		};
+		uploader.onCancelItem = function(fileItem, response, status, headers) {
+			console.info('onCancelItem', fileItem, response, status, headers);
+		};
+		uploader.onCompleteItem = function(fileItem, response, status, headers) {
+			console.info('onCompleteItem', fileItem, response, status, headers);
+		};
+		uploader.onCompleteAll = function() {
+			console.info('onCompleteAll');
+		};
+		//console.info('uploader', uploader);
+		
+		$scope.removeItem = function($event,item){
+			var index = $($event.target).attr("data-value");
+			if(item.fileId != "" && item.fileId != undefined && item.fileId != null){
+				var data = {
+    				"bookId":$("#tab3").find(".bookId").val(),
+    				"fileType":"02",
+	        		"fileId":item.fileId
+	        	}
+    			var _url = "book/file/remove";
+				main.ajax({
+	        		"_url":_url,
+	        		"_type":"post",
+	        		"_data":data,
+	        		"sync": false,
+	        		"_back":function(res){
+	        			if(index){
+	        				item.remove(index);	
+	        			}else{
+	        				item.remove();
+	        			}
+	        			realign();
+	        		}
+	        	})
+			}else{
+				item.remove()
+				realign();
+				//serialMusic();
+			}
+		}
+		$scope.removeAllItem = function(){
+			fileIndex = 1;
+			data = {
+				"bookId":$("#tab3").find(".bookId").val(),
+				"fileType": "02"
+        	}
+			_url = "book/file/remove";
+			main.ajax({
+        		"_url":_url,
+        		"_type":"post",
+        		"_data":data,
+        		"_back":function(res){
+        			uploader.modiList = [];
+        			uploader.clearQueue()
+        		}
+        	})
+		}
+		
+		function realign(){
+			for(var i=0;i<uploader.queue.length;i++){
+				uploader.queue[i].book = {
+					"bookChapter": i+1
+				}
+			}
+		}
+		
+		function serialMusic(){
+			if(uploader.queue.length == 0){
+				$("#fileMusic").find("input").attr("disabled","disabled");
+			}else{
+				if(uploader.getNotUploadedItems().length==0){
+					$("#fileMusic").find("input").removeAttr("disabled");
+				}else{
+					$("#fileMusic").find("input").attr("disabled","disabled");
+				}
+			}
+		}
+	};
+</script>
+<!-- END MAIN CONTENT -->

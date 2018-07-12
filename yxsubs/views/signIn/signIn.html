@@ -1,0 +1,35 @@
+<ion-view view-title="我的签到">
+	<ion-content class="setting">
+		<ion-list>
+			<ion-item class="login">
+				<p class="readTitle">{{mysign.gdTitle}}</p>
+			</ion-item>
+			<ion-item class="login" >
+				<div class="row">
+					<div style="border:0px solid #000">
+						<img src={{mysign.headUrl}} class="avatarPre"/>
+					</div>
+					<div style="border:0px solid #000;line-height: 20px;margin-top: 5px;">
+						<p ng-if="!processing" class="nameTitle">{{mysign.nickName}}</p>
+						<p class="sTitle">{{mysign.gdSlogan}}</p>
+					</div>
+				</div>
+			</ion-item>
+			<ion-item class="item-divider item-gap"></ion-item>
+			<div class="button-bar bar-light">
+				<a class="button icon-left" style="padding: 14px 16px;line-height: 26px;">
+					<b>{{mysign.signContinuousDays}}天</b>
+					<br> 当期连续签到
+				</a>
+				<a class="button" style="padding: 14px 16px;line-height: 26px;">
+					<b>{{mysign.signRate}}%</b>
+					<br> 当期累计签到率
+				</a>
+			</div>
+			<ion-item class="item-divider item-gap"></ion-item>
+			<div id="calendarSign"></div>
+		</ion-list>
+	</ion-content>
+	
+</ion-view>
+

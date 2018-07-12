@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title></title>
+  <!-- compiled css output -->
+  <link href="css/ionic.app.css" rel="stylesheet">
+  <!--日期style-->
+	<link rel="stylesheet" href="css/sign.css">
+  
+  <!--单独style-->
+	<link href="css/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/wx-audio.css">
+  <!-- ionic/angularjs js -->
+  <script src="js/jquery-1.8.1.min.js"></script>
+  <script src="js/calendar.js"></script>
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/ionic/js/ionic.js"></script>
+  <script src="lib/ionic/js/ionic-angular.js"></script>
+  <!--<script src="lib/ionic/js/ionic-angular.min.js"></script>-->
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <!--<script src="lib/ionic/js/ionic.bundle.min.js"></script>-->
+  <script src="lib/angular-resource/angular-resource.min.js"></script>
+  <script src="lib/moment/min/moment-with-locales.js"></script>
+  <script src="lib/angular-moment/angular-moment.min.js"></script>
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
+<!--  <script src="cordova.js"></script>-->
+
+  <!-- your app's js -->
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="views/topic/topics.js"></script>
+  <script src="views/my/my.js"></script>
+  <script src="views/explore/explore.js"></script>
+  <script src="views/signIn/signIn.js"></script>
+  <script src="js/public.js"></script>
+	<script src="js/wx-audio.js"></script>
+	<script>
+			  $().ready(function(){
+			  
+			  	var url = location.search;
+			  	$("#userToken").val(url.substr(7));
+				});
+		</script>
+</head>
+
+<body ng-app="ioniclub">
+      
+ 	<input type="hidden" id="userToken" />
+      
+  <ion-nav-bar class="bar-positive">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <!--
+  The views will be rendered in the <ion-nav-view> directive below
+  Templates are in the /templates folder (but you could also
+  have templates inline in this html file if you'd like).
+-->
+
+  <ion-nav-view></ion-nav-view>
+
+</body>
+
+</html>

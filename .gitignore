@@ -21,3 +21,21 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+mmanage/.idea
+mmanage/.settings
+mmanage/.classpath
+mmanage/.project
+mmanage/target
+subser/target
+subser/.idea
+subser/.settings
+subser/.classpath
+subser/.mymetadata
+subser/.project
+yxgd-core/.settings
+yxgd-core/.calsspath
+yxgd-core/.project
+yxgd-core/target
+yxrbmg/.project
+yxsubs/.project
