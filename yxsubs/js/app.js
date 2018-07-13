@@ -179,7 +179,7 @@ angular.module('ioniclub', ['ionic', 'ngCordova', 'ngResource',
 	    templateUrl: "views/tabs.html"
 	  })
     
-		/*当期共度*/
+		/*当期共读*/
   .state('tab.topics', {
       url: '/topics',
       views: {
@@ -200,7 +200,7 @@ angular.module('ioniclub', ['ionic', 'ngCordova', 'ngResource',
       }
     })
     
-    /*共度计划*/
+    /*共读计划*/
     .state('tab.explore', {
       url: '/explore',
       views: {
@@ -222,6 +222,16 @@ angular.module('ioniclub', ['ionic', 'ngCordova', 'ngResource',
       }
     })
     
+    /*共读计划图书详情*/
+    .state('tab.explorebook-detail', {
+      url: '/explore222/:id',
+      views: {
+        'tab-explore': {
+          templateUrl: 'views/explore/explorebookdetail.html',
+          controller: 'ExploreBookDetailCtrl'
+        }
+      }
+    })
     
     /*我的签到*/
     .state('tab.signIn', {

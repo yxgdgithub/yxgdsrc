@@ -149,9 +149,6 @@
 	     });
 	   };
 		
-		
-		
-    
     $scope.loginName = currentUser.loginname || null;
 
     $scope.$on('$ionicView.beforeEnter', function() {
@@ -177,28 +174,6 @@
     $scope.tabs = Tabs;
     $scope.currentTab = Topics.getCurrentTab();
 
-    // .fromTemplateUrl() method
-//  $ionicPopover.fromTemplateUrl('views/topic/popover.html', {
-//    scope: $scope
-//  }).then(function(popover) {
-//    $scope.popover = popover;
-//  });
-//
-//  $scope.openPopover = function($event) {
-//    // console.log('show popover');
-//    $scope.popover.show($event);
-//  };
-//
-//  $scope.changeTab = function(tab) {
-//    Topics.setCurrentTab(tab);
-//    $scope.currentTab = Topics.getCurrentTab();
-//    $scope.popover.hide();
-//  };
-
-
-    // $topicCategory = $ionicTabsDelegate.$getByHandle('topic-category');
-    // var category = TabCategory.get($topicCategory.selectedIndex());
-    // var category = "all";
     Topics.fetchTopStories();
 
     $scope.$on('ioniclub.topicsUpdated', function() {
@@ -216,14 +191,6 @@
       // setBadge(0);
     });
 
-    // $scope.onTabSelected = function() {
-    //   // category = TabCategory.get($topicCategory.selectedIndex());
-    //   Topics.setCurrentTab(category);
-    //   Topics.fetchTopStories();
-    //   $scope.topics = Topics.getTopics();
-    //   // console.log(category);
-    // };
-
     $scope.doRefresh = function() {
       Topics.fetchTopStories();
     };
@@ -239,14 +206,6 @@
       // console.log(Topics.hasNextPage());
       return Topics.hasNextPage();
     };
-
-    // Create the new topic modal that we will use later
-//  $ionicModal.fromTemplateUrl('views/topic/newTopic.html', {
-//    tabs: Tabs,
-//    scope: $scope
-//  }).then(function(modal) {
-//    $scope.newTopicModal = modal;
-//  });
 
     $scope.newTopicData = {
       tab: 'share',
@@ -316,7 +275,6 @@
     $scope.loginName = currentUser.loginname || null;
 	/*图书详情*/
 	var bookId = $stateParams.id;
-	
 	main.ajax({
 		"_url": "/subser/book/"+bookId,
 		"_type":"post",
@@ -325,171 +283,6 @@
 			$scope.book = res.content;
 		}
 	})
-
-    $scope.$on('$ionicView.afterEnter', function() {
-      // $rootScope.hideTabs = 'tabs-item-hide';
-
-
-      document.addEventListener("deviceready", function() {
-        // trackView
-        $cordovaGoogleAnalytics.trackView('topic view');
-      }, false);
-    });
-
-    $scope.$on('$ionicView.beforeEnter', function() {
-      $rootScope.hideTabs = 'tabs-item-hide';
-    });
-
-    $scope.$on('$ionicView.beforeLeave', function() {
-      // $rootScope.hideTabs = '';
-    });
-	
-
-
-
-    // $ionicLoading.show({
-    //   template: 'Loading...',
-    //   noBackdrop: true
-    // });
-
-    var halfHeight = null;
-    $scope.getHalfHeight = function() {
-      if (ionic.Platform.isAndroid()) return 0;
-      if (!halfHeight) {
-        halfHeight = (document.documentElement.clientHeight / 2) - 200;
-      }
-      // console.log("halfHeight:"+halfHeight);
-      return halfHeight;
-
-    };
-
-    var id = $stateParams.id;
-
-    Topic.getById(id).$promise.then(function(r) {
-      $scope.finished = true;
-      $scope.topic = r.data;
-    });
-
-    // load topic data
-    $scope.loadTopic = function(reload) {
-      var topicResource;
-      if (reload === true) {
-        topicResource = Topic.get(id);
-      } else {
-        topicResource = Topic.getById(id);
-      }
-      return topicResource.$promise.then(function(response) {
-        $scope.topic = response.data;
-      }, $rootScope.requestErrorHandler({
-        noBackdrop: true
-      }, function() {
-        $scope.loadError = true;
-      }));
-    };
-    $scope.loadTopic();
-
-    $scope.replyData = {
-      content: ''
-    };
-
-    $scope.collect = function(topic) {
-      // console.log(topic);
-      Topic.collect(topic.id).$promise.then(function(response) {
-        if (response.success) {
-          $ionicLoading.show({
-            noBackdrop: true,
-            template: '收藏成功',
-            duration: 1000
-          });
-        }
-      }, $rootScope.requestErrorHandler);
-    };
-
-    $scope.share = function(topic) {
-      var message = "测试分享内容",
-        subject = topic.title,
-        file = null,
-        link = "http://ionichina.com/topic/" + topic.id;
-
-      document.addEventListener("deviceready", function() {
-        $cordovaSocialSharing
-          .share(message, subject, file, link) // Share via native share sheet
-          .then(function(result) {
-            console.log('result:' + result);
-            // Success!
-          }, function(err) {
-            console.log('err:' + err);
-            // An error occured. Show a message to the user
-          });
-      }, false);
-    };
-
-    // save reply
-    $scope.saveReply = function() {
-      $log.debug('new reply data:', $scope.replyData);
-      $ionicLoading.show();
-      Topic.saveReply(id, $scope.replyData).$promise.then(function(response) {
-        $ionicLoading.hide();
-        $scope.replyData.content = '';
-        $log.debug('post reply response:', response);
-        $scope.loadTopic(true).then(function() {
-          $ionicScrollDelegate.scrollBottom();
-        });
-      }, $rootScope.requestErrorHandler);
-    };
-
-    // show actions
-    $scope.showActions = function(reply) {
-
-      var currentUser = User.getCurrentUser();
-      console.log('currentUser.loginname:' + currentUser.loginname + '   reply.author.loginname:' + reply.author.loginname);
-      if (currentUser.loginname === undefined || currentUser.loginname === reply.author.loginname) {
-        return;
-      }
-      $log.debug('action reply:', reply);
-      var upLabel = '赞';
-      // detect if current user already do up
-      if (reply.ups.indexOf(currentUser.id) !== -1) {
-        upLabel = '已赞';
-      }
-      var replyContent = '@' + reply.author.loginname;
-      $ionicActionSheet.show({
-        buttons: [{
-          text: '回复'
-        }, {
-          text: upLabel
-        }],
-        titleText: replyContent,
-        cancel: function() {},
-        buttonClicked: function(index) {
-
-          // reply to someone
-          if (index === 0) {
-            $scope.replyData.content = replyContent + ' ';
-            $scope.replyData.reply_id = reply.id;
-            $timeout(function() {
-              document.querySelector('.reply-new input').focus();
-            }, 1);
-          }
-
-          // up reply
-          if (index === 1) {
-            Topic.upReply(reply.id).$promise.then(function(response) {
-              $log.debug('up reply response:', response);
-              $ionicLoading.show({
-                noBackdrop: true,
-                template: response.action === 'up' ? '点赞成功' : '点赞已取消',
-                duration: 1000
-              });
-            }, $rootScope.requestErrorHandler({
-              noBackdrop: true,
-            }));
-          }
-          return true;
-        }
-      });
-    };
-
   })
 
 .factory('Topics', function($resource, $rootScope, Storage, User, ENV) {
@@ -684,4 +477,6 @@
       }
     };
 
-  });
+  }
+  
+  );

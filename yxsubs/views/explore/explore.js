@@ -113,3 +113,25 @@ angular.module('ioniclub')
 		$(".exploreSign").hide();
 	})
 })
+
+.controller('ExploreBookDetailCtrl', function($scope, $rootScope, $state, $timeout, $log,
+    $ionicTabsDelegate, $stateParams, $ionicLoading,
+    $ionicScrollDelegate, $ionicActionSheet,
+    $cordovaSocialSharing, $cordovaGoogleAnalytics,
+    Topic, User) {
+    // console.table($ionicHistory.viewHistory());
+    $scope.finished = false;
+    // get current user
+    var currentUser = User.getCurrentUser();
+    $scope.loginName = currentUser.loginname || null;
+	/*图书详情*/
+	var bookId = $stateParams.id;
+	main.ajax({
+		"_url": "/subser/book/"+bookId,
+		"_type":"post",
+		"_data":"",
+		"_back":function(res){
+			$scope.book = res.content;
+		}
+	})
+})

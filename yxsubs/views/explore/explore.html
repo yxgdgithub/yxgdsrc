@@ -25,7 +25,7 @@
 				    </div>
 				    <div class="booklist">
 					    <ul class="row">
-					    	<li class="col col-33" ng-repeat="items in item.gdBook"><img ng-src="{{items.bookSltPath}}" /></li>
+					    	<li class="col col-33" ng-repeat="items in item.gdBook"><img ng-src="{{items.bookSltPath}}" ui-sref="tab.explorebook-detail({'id':items.bookId})"  /></li>
 					    </ul>
 				    </div>
 			  </ion-item>
