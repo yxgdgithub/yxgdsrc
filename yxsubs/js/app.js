@@ -175,6 +175,7 @@ angular.module('ioniclub', ['ionic', 'ngCordova', 'ngResource',
 
     .state('tab', {
 	    url: "/tab",
+	    cache:'false',
 	    abstract: true,
 	    templateUrl: "views/tabs.html"
 	  })
@@ -182,6 +183,7 @@ angular.module('ioniclub', ['ionic', 'ngCordova', 'ngResource',
 		/*当期共读*/
   .state('tab.topics', {
       url: '/topics',
+      cache:'false',
       views: {
         'tab-topics': {
           templateUrl: 'views/topic/topics.html',
@@ -192,6 +194,7 @@ angular.module('ioniclub', ['ionic', 'ngCordova', 'ngResource',
   /*当期共读内容书详情*/
     .state('tab.topic-detail', {
       url: '/topics/:id',
+      cache:'false',
       views: {
         'tab-topics': {
           templateUrl: 'views/topic/topic.html',
@@ -203,6 +206,7 @@ angular.module('ioniclub', ['ionic', 'ngCordova', 'ngResource',
     /*共读计划*/
     .state('tab.explore', {
       url: '/explore',
+      cache:'false',
       views: {
         'tab-explore': {
           templateUrl: 'views/explore/explore.html',
@@ -214,6 +218,7 @@ angular.module('ioniclub', ['ionic', 'ngCordova', 'ngResource',
     /*我的共读*/
     .state('tab.my', {
       url: '/my',
+      cache:'false',
       views: {
         'tab-my': {
           templateUrl: 'views/my/my.html',
@@ -224,7 +229,8 @@ angular.module('ioniclub', ['ionic', 'ngCordova', 'ngResource',
     
     /*共读计划图书详情*/
     .state('tab.explorebook-detail', {
-      url: '/explore222/:id',
+      url: '/explore/:id',
+      cache:'false',
       views: {
         'tab-explore': {
           templateUrl: 'views/explore/explorebookdetail.html',
@@ -236,6 +242,7 @@ angular.module('ioniclub', ['ionic', 'ngCordova', 'ngResource',
     /*我的签到*/
     .state('tab.signIn', {
       url: '/signIn',
+      cache:'false',
       views: {
         'tab-signIn': {
           templateUrl: 'views/signIn/signIn.html',
