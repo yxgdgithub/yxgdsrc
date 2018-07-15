@@ -17,8 +17,9 @@ public interface GdChapterPerDayRelMapper extends Mapper<GdChapterPerDayRel>, My
 	@Select("select "
 			+ "plan.gdBeginDate,plan.gdEndDate,plan.gdId "
 			+ "from  t_gd_plan plan "
-			+ "where plan.gdState = '1' and plan.signupEndDate = #{signupEndDate}")
+			+ "where plan.gdState = '1' and plan.signupBeginDate <= #{signupEndDate} and plan.signupEndDate >= #{signupEndDate} order by plan.gdid desc limit 1")
 	public GdPlan getNextFirstEndDay(@Param("signupEndDate") String signupEndDate);
+	
 	@Select("select distinct "
 			+ "p.gdId, br.bookChapter,br.bookId "
 			+ "from t_gd_plan p "
@@ -26,9 +27,10 @@ public interface GdChapterPerDayRelMapper extends Mapper<GdChapterPerDayRel>, My
 			+ "left join t_gd_book book on brel.bookid = book.bookid "
 			+ "left join t_gd_book_resource br on book.bookId = br.bookId "
 			+ "where "
-			+ "p.gdState = '1' and p.signupEndDate = #{signupEndDate} "
+			+ "p.gdId = #{gdId} "
 			+ "order by p.gdid,br.bookid,br.bookChapter asc")
-	public List<GdChapterPerDayRel> getGdBookChapterRelInfo(@Param("signupEndDate") String signupEndDate);
+	public List<GdChapterPerDayRel> getGdBookChapterRelInfo(@Param("gdId") Integer gdId);
+	
 	/**
 	 * @param gdDate
 	 */

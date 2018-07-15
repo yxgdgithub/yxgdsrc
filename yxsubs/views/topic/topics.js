@@ -41,7 +41,7 @@
 		"_data":{'userToken': userToken},
 		"_back":function(res){
 			var resData = res.content;
-			console.log(resData.nowFlag)
+//			console.log(resData.nowFlag)
 			resData.gdBeginDate = resData.gdBeginDate.replace(/-/g,'/');
 			resData.gdEndDate = resData.gdEndDate.replace(/-/g,'/');
 			$scope.now = resData;
@@ -174,7 +174,7 @@
     $scope.tabs = Tabs;
     $scope.currentTab = Topics.getCurrentTab();
 
-    Topics.fetchTopStories();
+    // Topics.fetchTopStories();
 
     $scope.$on('ioniclub.topicsUpdated', function() {
       // $timeout(function() {
@@ -192,7 +192,7 @@
     });
 
     $scope.doRefresh = function() {
-      Topics.fetchTopStories();
+      // Topics.fetchTopStories();
     };
 
 
@@ -309,10 +309,12 @@
       fetchTopStories: function() {
         // console.log("currentTab: " + currentTab);
         var hasNextPage = true;
+        
         resource.query({
           tab: currentTab
         }, function(r) {
-          // console.log(r);
+        
+          console.log(r);
           if (r.data.length < 20) {
             hasNextPage = false;
           }
@@ -322,7 +324,7 @@
             'data': r.data
           };
           // topics[currentTab] = r.data;
-          $rootScope.$broadcast('ioniclub.topicsUpdated', topics[currentTab].data);
+//        $rootScope.$broadcast('ioniclub.topicsUpdated', topics[currentTab].data);
           // console.table(topics);
 
         });
@@ -333,61 +335,61 @@
       },
       setCurrentTab: function(tab) {
         currentTab = tab;
-        this.fetchTopStories();
+        // this.fetchTopStories();
         // $rootScope.$broadcast('ioniclub.topicsUpdated', topics[currentTab]);
       },
       getCurrentTab: function() {
         return currentTab;
       },
-      increaseNewTopicsCount: function() {
-        var nextPage = topics[currentTab].nextPage;
-        var hasNextPage = topics[currentTab].hasNextPage;
-        var topicsData = topics[currentTab].data;
-        resource.query({
-          tab: currentTab,
-          page: nextPage,
-          limit: 20,
-          mdrender: true
-
-        }, function(r) {
-          // console.log(r);
-          nextPage++;
-          if (r.data.length < 20) {
-            hasNextPage = false;
-          }
-          topicsData = topicsData.concat(r.data);
-          topics[currentTab] = {
-            'nextPage': nextPage,
-            'hasNextPage': hasNextPage,
-            'data': topicsData
-          };
-          // topics[currentTab] = r.data;
-          $rootScope.$broadcast('ioniclub.topicsUpdated', topics[currentTab]);
-          // console.table(topics);
-
-        });
-      },
-      hasNextPage: function() {
-        if (topics[currentTab] === undefined) {
-          return false;
-        }
-        return topics[currentTab].hasNextPage;
-      },
-      saveNewTopic: function(newTopicData) {
-        var currentUser = User.getCurrentUser();
-        return resource.save({
-          accesstoken: currentUser.accesstoken
-        }, newTopicData);
-      }
+//    increaseNewTopicsCount: function() {
+//      var nextPage = topics[currentTab].nextPage;
+//      
+//      var hasNextPage = topics[currentTab].hasNextPage;
+//      var topicsData = topics[currentTab].data;
+//      resource.query({
+//        tab: currentTab,
+//        page: nextPage,
+//        limit: 20,
+//        mdrender: true
+//
+//      }, function(r) {
+//        // console.log(r);
+//        nextPage++;
+//        if (r.data.length < 20) {
+//          hasNextPage = false;
+//        }
+//        topicsData = topicsData.concat(r.data);
+//        topics[currentTab] = {
+//          'nextPage': nextPage,
+//          'hasNextPage': hasNextPage,
+//          'data': topicsData
+//        };
+//        // topics[currentTab] = r.data;
+//        $rootScope.$broadcast('ioniclub.topicsUpdated', topics[currentTab]);
+//        // console.table(topics);
+//
+//      });
+//    },
+//    hasNextPage: function() {
+//      if (topics[currentTab] === undefined) {
+//        return false;
+//      }
+//      return topics[currentTab].hasNextPage;
+//    },
+//    saveNewTopic: function(newTopicData) {
+//      var currentUser = User.getCurrentUser();
+//      return resource.save({
+//        accesstoken: currentUser.accesstoken
+//      }, newTopicData);
+//    }
 
     };
-
-
-  })
-  .factory('Topic', function($resource, $rootScope, $q, Storage, User, My, ENV) {
+})
+.factory('Topic', function($resource, $rootScope, $q, Storage, User, My, ENV) {
     var APIUrl = ENV.api + '/topic/:id',
       topic,
       currentTab = "all";
+     
     var resource = $resource(ENV.api + '/topic/:id', {
       id: '@id',
     }, {
@@ -430,37 +432,37 @@
         });
 
       },
-      saveReply: function(topicId, replyData) {
-        var reply = angular.extend({}, replyData);
-        var currentUser = User.getCurrentUser();
-        // add send from
-        if (My.getSettings().sendFrom) {
-          reply.content = replyData.content + '\n<br/> 发自 [Ioniclub](https://github.com/IonicChina/ioniclub)';
-        }
-        return resource.reply({
-          topicId: topicId,
-          accesstoken: currentUser.accesstoken
-        }, reply);
-      },
-      upReply: function(replyId) {
-        var currentUser = User.getCurrentUser();
-        return resource.upReply({
-          replyId: replyId,
-          accesstoken: currentUser.accesstoken
-        }, null, function(response) {
-          if (response.success) {
-            angular.forEach(topic.replies, function(reply, key) {
-              if (reply.id === replyId) {
-                if (response.action === 'up') {
-                  reply.ups.push(currentUser.id);
-                } else {
-                  reply.ups.pop();
-                }
-              }
-            });
-          }
-        });
-      },
+//    saveReply: function(topicId, replyData) {
+//      var reply = angular.extend({}, replyData);
+//      var currentUser = User.getCurrentUser();
+//      // add send from
+//      if (My.getSettings().sendFrom) {
+//        reply.content = replyData.content + '\n<br/> 发自 [Ioniclub](https://github.com/IonicChina/ioniclub)';
+//      }
+//      return resource.reply({
+//        topicId: topicId,
+//        accesstoken: currentUser.accesstoken
+//      }, reply);
+//    },
+//    upReply: function(replyId) {
+//      var currentUser = User.getCurrentUser();
+//      return resource.upReply({
+//        replyId: replyId,
+//        accesstoken: currentUser.accesstoken
+//      }, null, function(response) {
+//        if (response.success) {
+//          angular.forEach(topic.replies, function(reply, key) {
+//            if (reply.id === replyId) {
+//              if (response.action === 'up') {
+//                reply.ups.push(currentUser.id);
+//              } else {
+//                reply.ups.pop();
+//              }
+//            }
+//          });
+//        }
+//      });
+//    },
       collect: function(topicId) {
         var currentUser = User.getCurrentUser();
         return resource.collect({
@@ -477,6 +479,6 @@
       }
     };
 
-  }
-  
-  );
+}
+
+);
