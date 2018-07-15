@@ -22,7 +22,7 @@ public class Jobs {
 	@Autowired
     private GdChapterPerDayRelMapper gdChapterPerDayRelMapper;
     
-	@Scheduled(cron = "* * 1 * * ?")
+	@Scheduled(cron = "* * 20 * * ?")
 	public void fixedRateJob(){
 		    int intBeginDate = 0;
 		    int intEndDate = 0;
