@@ -17,7 +17,7 @@ server:
 spring:
     datasource:
         name: test
-        url: jdbc:mysql://127.0.0.1:3306/testdb?characterEncoding=utf-8
+        url: jdbc:mysql://192.168.13.13:3306/testdb?characterEncoding=utf-8
         username: yxgd
         password: yxgd
         # 使用druid数据源

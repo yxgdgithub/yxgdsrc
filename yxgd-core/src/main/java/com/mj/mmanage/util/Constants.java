@@ -103,8 +103,8 @@ public class Constants {
 	 public static String TICKET_URL 
 	 	= "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s&type=jsapi";
 	 
-	 public final static String REDIRECT_URI = "http://127.0.0.1";
-//	 public final static String REDIRECT_URI = "http://yxgd.yusys.com.cn";
+//	 public final static String REDIRECT_URI = "http://127.0.0.1";
+	 public final static String REDIRECT_URI = "http://yxgd.yusys.com.cn";
 
      public final static String APPID = "wxb89606f58305f38d";
      public final static String SECRET = "9cf587bf826a8c75cebaceb0f4c0e063";
