@@ -12,7 +12,7 @@ navigation history that also transitions its views in and out.
 
 
 
-<ion-tabs class="tabs-icon-top tabs-stable tabs-color-positive {{hideTabs}} ">
+<ion-tabs class="tabs-icon-top tabs-stable tabs-color-positive {{hideTabs}} " ng-class="{'tabs-item-hide': $root.hideTabs}">
 
   <!-- Dashboard Tab -->
   <ion-tab title="当期共读" icon-off="ion-social-buffer-outline" icon-on="ion-social-buffer" href="#/tab/topics">

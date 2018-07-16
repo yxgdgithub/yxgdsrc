@@ -78,7 +78,7 @@
 			$scope.$apply();
 		}
     })
-	
+		
 		/*立即报名*/
 		$scope.apply = function(gdId,applyFlag,userToken) {
 			
@@ -340,7 +340,8 @@
       },
       getCurrentTab: function() {
         return currentTab;
-      },
+      }
+      //,
 //    increaseNewTopicsCount: function() {
 //      var nextPage = topics[currentTab].nextPage;
 //      
