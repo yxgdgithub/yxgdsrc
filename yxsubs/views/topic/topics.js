@@ -76,8 +76,101 @@
 				$("#down_").text('已结束').show();
 			}
 			$scope.$apply();
+			$scope.test();
 		}
     })
+	
+	/*立即报名*/
+		$scope.test = function() {
+			var url = window.location.href; 
+    var discuss ; 
+    var title ; 
+    var shareImgUrl=""; 
+    var timestamp; 
+    var noncestr; 
+    var signature; 
+
+	 
+	$.ajax({  
+		    type: "GET",  
+		    url: "subser/WebChatShareController/getSignature",  
+		    data:{url:url},  
+		    success: function(data){  
+		        console.log("success");  
+		        var objData=JSON.parse(data);  
+		        timestamp=objData.timestamp;  
+		        noncestr=objData.noncestr;  
+		        signature=objData.signature;  
+		        url=objData.url;
+		        console.log(objData);
+		        alert(url);  
+		         wx.config({  
+		        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。  
+		        appId: 'wxb89606f58305f38d', // 和获取Ticke的必须一样------必填，公众号的唯一标识  
+		        timestamp:timestamp, // 必填，生成签名的时间戳  
+		        nonceStr: noncestr, // 必填，生成签名的随机串  
+		        signature: signature,// 必填，签名，见附录1  
+		        jsApiList: [  
+		            'onMenuShareTimeline','onMenuShareAppMessage','hideMenuItems' 
+		        ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2  
+		    });
+			  wx.ready(function(){
+			  			
+			  			wx.hideMenuItems({
+                    menuList: ['menuItem:share:qq',
+                               'menuItem:share:weiboApp',
+                               'menuItem:favorite',
+                               'menuItem:share:facebook',
+                               '/menuItem:share:QZone'], // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+                    success:function(res){
+                        // alert("隐藏");
+                    }
+                });
+			  	
+				 			// 获取“分享给朋友”按钮点击状态及自定义分享内容接口
+		          wx.onMenuShareAppMessage({
+		              title: "1231123",
+		              desc: "11111",
+		              link: url,
+		              imgUrl:'http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83erfJg8Y6J7dicQ2iaYCbprMP4E911PFlR0lbuBIfc4FqLRrbk89FYCDMojte2p13icHc6Kibmpb5I6BZQ/132',
+		              type: 'link',
+		              dataUrl: '',
+		              success: function () {
+		                  alert("final success3");
+		              },
+		               cancel: function () {   
+				            // 用户取消分享后执行的回调函数  
+				            alert("分享给朋友失败");  
+					        }
+					 		});
+					 		wx.error(function(res){
+			            // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+			            alert("errorMSG:"+res);
+			        });
+				          
+				    //------------"分享到朋友圈"  
+//				    wx.onMenuShareTimeline({  
+//				        title: '1', // 分享标题  
+//				        desc: '2', // 分享描述  
+//				        link: 'http://www.baidu.com', // 分享链接  
+//				        imgUrl: 'https://pic1.zhimg.com/da8e974dc_s.jpg', // 分享图标  
+//				        type: '', // 分享类型,music、video或link，不填默认为link  
+//				        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空  
+//				        success: function () {  
+//				            alert("朋友圈OK");  
+//				        },  
+//				        cancel: function () {  
+//				           alert("朋友圈cancel");
+//				        }  
+//				    }); 
+  		});
+		    }, 
+		    statusCode: {404: function(){  
+		        alert('page not found');  
+		    }}  
+		});  
+		
+		}
 		
 		/*立即报名*/
 		$scope.apply = function(gdId,applyFlag,userToken) {

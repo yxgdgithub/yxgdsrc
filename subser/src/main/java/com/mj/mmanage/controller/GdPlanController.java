@@ -76,6 +76,11 @@ public class GdPlanController {
 	public GdPlan getGdPlansByWXUserID(HttpServletRequest request) throws AppException {
 		String userToken = request.getParameter("userToken");
 		logger.info("getGdPlansByWXUserID->execute->userToken->" + userToken);
+		if (StringUtil.isNotEmpty(userToken)) {
+			userToken = userToken.split("&")[0];
+		}
+		
+		logger.info("getGdPlansByWXUserID->execute->userToken.split[&][0]->" + userToken);
 		
 		String wxUserId = CheckToken.getWebChatUserId(userToken);
 		
@@ -415,5 +420,4 @@ public class GdPlanController {
 		logger.info("lstGdSignIn.size()->"+ lstGdSignIn.size());
 		return lstGdSignIn;
 	}
-
 }

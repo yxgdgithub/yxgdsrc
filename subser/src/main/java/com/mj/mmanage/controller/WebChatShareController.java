@@ -51,7 +51,7 @@ public class WebChatShareController {
 			Ticket oldticket = null;
 
 			if (oldticket == null) {// 第一次访问，标签不存在。
-				
+				logger.info("第一次访问，标签不存在");
 				executeTicket(response, "1", url, format);
 				return null;
 			} 
@@ -61,6 +61,7 @@ public class WebChatShareController {
 				String oldAcquiretime = oldticket.getAcquiretime();
 				long difference = format.parse(format.format(new Date())).getTime() - format.parse(oldAcquiretime).getTime();
 				if (difference > 7100000) {// 标签超时,重新到微信服务器请求标签超时时间为7200秒（7200000毫秒）
+					logger.info("标签超时,重新到微信服务器请求标签超时时间为7200秒");
 					executeTicket(response, "2", url, format);
 					return null;
 				} 
@@ -75,6 +76,7 @@ public class WebChatShareController {
 					 **** 根据第1点要求 signature 配置的时候很容易出错，需要把生成 Ticket的 noncestr和
 					 * timestamp传给客户端***
 					 */
+					logger.info("标签未超时");
 					String signature = signature(oldticket.getTicket(), oldticket.getTimestamp(), oldticket.getNoncestr(), url);
 					SignatureBean signatureBean = new SignatureBean();
 					signatureBean.setNoncestr(oldticket.getNoncestr());
