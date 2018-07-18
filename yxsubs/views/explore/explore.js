@@ -3,7 +3,7 @@ angular.module('ioniclub')
 .controller('ExploreCtrl', function($scope, $timeout, $cordovaGoogleAnalytics, $ionicSlideBoxDelegate) {
 
 	var userToken=$("#userToken").val();
-
+	document.title = "宇信共读-伴你左右";
 	$scope.$on('$ionicView.afterEnter', function() {
 	    document.addEventListener("deviceready", function() {
 	      // trackView
@@ -25,7 +25,7 @@ angular.module('ioniclub')
 			"_type":"post",
 			"_data":{'userToken': userToken},
 			"_back":function(res){
-				
+					document.title = "宇信共读-伴你左右";
 					$scope.underway = res.content;
 					$scope.$apply();
 			}
@@ -37,7 +37,7 @@ angular.module('ioniclub')
 			"_type":"post",
 			"_data":{'userToken': userToken},
 			"_back":function(res){
-			
+					document.title = "宇信共读-伴你左右";
 					$scope.accomplish = res.content;
 					$scope.$apply();
 			}
@@ -49,9 +49,9 @@ angular.module('ioniclub')
 			"_type":"post",
 			"_data":{'userToken': userToken},
 			"_back":function(res){
-			
+					document.title = "宇信共读-伴你左右";
 					$scope.advance = res.content;
-				  $scope.$apply();
+				    $scope.$apply();
 			}
 		})
 		}
@@ -71,8 +71,10 @@ angular.module('ioniclub')
 			"_type":"post",
 			"_data":{'userToken': userToken},
 			"_back":function(res){
+					document.title = "宇信共读-伴你左右";
 					$scope.underway = res.content;
 					$scope.$apply();
+					
 			}
 		})
 	}
@@ -124,6 +126,7 @@ angular.module('ioniclub')
     // get current user
     var currentUser = User.getCurrentUser();
     $scope.loginName = currentUser.loginname || null;
+    
 	/*图书详情*/
 	var bookId = $stateParams.id;
 	main.ajax({
@@ -131,7 +134,9 @@ angular.module('ioniclub')
 		"_type":"post",
 		"_data":"",
 		"_back":function(res){
+			
 			$scope.book = res.content;
+			
 		}
 	})
 })

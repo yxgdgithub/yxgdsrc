@@ -52,7 +52,7 @@ public class OuthTest {
 		logger.info("获取token成功,token->" + token);
 		try {
 			attributes.addFlashAttribute("token", token);
-			servletResponse.sendRedirect(Constants.REDIRECT_URI + "/index.html?token="+token);
+			servletResponse.sendRedirect("http://127.0.0.1" + "/index.html?token="+token);
 			
 		}catch(Exception e) {
 			e.printStackTrace();

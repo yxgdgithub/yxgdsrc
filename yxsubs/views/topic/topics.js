@@ -8,6 +8,7 @@
     // get current user
     var currentUser = User.getCurrentUser();
     var userToken=$("#userToken").val();
+   
     /*倒计时计算*/
 	function countDown(end_time,day_elem,hour_elem,minute_elem,second_elem,current_time){
 		//if(typeof end_time == "string")
@@ -40,7 +41,7 @@
 		"_type":"post",
 		"_data":{'userToken': userToken},
 		"_back":function(res){
-			
+			document.title = "宇信共读-伴你左右";
 			var resData = res.content;
 			
 			// 如果页面是通过微信分享页面进入，则需要走一次微信授权认证。
@@ -89,7 +90,9 @@
 	
 	/* 微信授权重定向页面 */
 	$scope.shareEnter = function() {
-				
+		
+		$("#gdPlanIonView").empty();
+		$("#gdPlanIonView").text("loading.....");
 		window.location.assign("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb89606f58305f38d&redirect_uri=http://yxgd.yusys.com.cn/subser/wxcontent&response_type=code&scope=snsapi_userinfo&state=STAT#wechat_redirect")
 	}
 	
