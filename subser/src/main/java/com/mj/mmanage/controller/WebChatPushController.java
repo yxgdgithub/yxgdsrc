@@ -132,7 +132,7 @@ public class WebChatPushController {
 	        	String toWxUserId = lstGdApply.get(i).getWxUserId();
 	        	
 	        	// 测试只给李海龙、陈翔、宁兆路发送推送消息
-	        	if (toWxUserId.equals("oC98LuC7T2U_B4Juy6HBO17kZfaE") || toWxUserId.equals("oC98LuIFhx8kBL5W1K4uFGgIkD2g") || toWxUserId.equals("oC98LuEf5GFwBTYRzPF6eXCeGr-Q")) {
+	        	// if (toWxUserId.equals("oC98LuC7T2U_B4Juy6HBO17kZfaE") || toWxUserId.equals("oC98LuIFhx8kBL5W1K4uFGgIkD2g") || toWxUserId.equals("oC98LuEf5GFwBTYRzPF6eXCeGr-Q")) {
 	        
 			        JSONObject json = new JSONObject();
 			        try {
@@ -151,7 +151,7 @@ public class WebChatPushController {
 			        
 			        executorService.execute(webChatPushService);
 	        	}
-	        }
+	        //}
         }
         else {
         	logger.info("今日无需要推送的人员");
