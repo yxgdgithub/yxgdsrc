@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
 import com.mj.mmanage.model.GdApply;
@@ -18,6 +20,7 @@ import com.mj.mmanage.util.Constants;
 import com.mj.mmanage.util.DateUtil;
 import com.mj.webchat.share.HttpsUtil;
 
+@Component
 public class WebChatPushController {
 	
 	private static Logger logger = Logger.getLogger(WebChatPushController.class);
@@ -25,6 +28,7 @@ public class WebChatPushController {
 	@Autowired
     private GdPlanService gdPlanService;
 	
+	@Scheduled(cron = "0 00 17 * * ?")
 	public void authoPushWechatmsgToUser() {
 		
 //		您有一条新的阅读任务待签到
@@ -42,18 +46,18 @@ public class WebChatPushController {
 		
 		if (gdPlan != null) {
 		
-		logger.info("推送的共读信息，共读编号为：" + gdPlan.getGdId());
-		
-		// 推送的信息
-		JSONObject pushGddata = packJsonMsg(gdPlan);
-		
-		logger.info("推送信息封装完毕->" + pushGddata.toString());
-		
-		sendWechatmsgToUser(gdPlan.getGdId(),
-						    Constants.PUSH_TEMPLAT_ID, 
-						    Constants.PUSH_TEMPLAT_CLICKURL, 
-						    Constants.PUSH_TEMPLAT_TOPCOLOR, 
-						    pushGddata);
+			logger.info("推送的共读信息，共读编号为：" + gdPlan.getGdId());
+			
+			// 推送的信息
+			JSONObject pushGddata = packJsonMsg(gdPlan);
+			
+			logger.info("推送信息封装完毕->" + pushGddata.toString());
+			
+			sendWechatmsgToUser(gdPlan.getGdId(),
+							    Constants.PUSH_TEMPLAT_ID, 
+							    Constants.PUSH_TEMPLAT_CLICKURL, 
+							    Constants.PUSH_TEMPLAT_TOPCOLOR, 
+							    pushGddata);
 		}
 		else {
 			logger.info("查无需要推送的共读信息");

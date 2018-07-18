@@ -260,7 +260,8 @@ public interface GdPlanMapper extends Mapper<GdPlan>, MySqlMapper<GdPlan> {
 	 * @return 推送的共读信息
 	 */
 	@Select("select "
-			+ " gdplan.gdTitle as gdTitle "
+			+ " gdplan.gdId as gdId "
+			+ " ,gdplan.gdTitle as gdTitle "
 			+ " ,gdbook.bookName as bookName "
 			+ " ,gdplan.sponsorUser as sponsorUser "
 			+ " ,gdplan.gdSlogan as gdSlogan"
