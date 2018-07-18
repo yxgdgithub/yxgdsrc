@@ -34,7 +34,7 @@ public class LoginCheckHandler extends HandlerInterceptorAdapter {
 		wXUserInfo.setId("12165465sf6d5sd");
 		wXUserInfo.setUsername("guobaoli");
 		MDC.put(Constants.WECHAT_ID, "12165465sf6d5sd");
-
+		logger.info("拦截请求");
 		return true;
 	}
 

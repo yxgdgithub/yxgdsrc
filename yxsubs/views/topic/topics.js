@@ -40,51 +40,64 @@
 		"_type":"post",
 		"_data":{'userToken': userToken},
 		"_back":function(res){
+			
 			var resData = res.content;
-//			console.log(resData.nowFlag)
-			resData.gdBeginDate = resData.gdBeginDate.replace(/-/g,'/');
-			resData.gdEndDate = resData.gdEndDate.replace(/-/g,'/');
-			$scope.now = resData;
-			$scope.$apply();
-			/*var signupEndDate = resData.signupEndDate; //报名结束时间
-			var nowTime = res.nowTime; //报名结束时间
-			//1.结束时间-当前时间
-			//2.转换为天时分秒*/
-			if(resData.nowFlag == 0){
-				var end_time = new Date(resData.signupEndDate.replace("-","/").replace("-","/") +" 23:59:59").getTime();
-				var current_time = new Date(res.nowTime.replace("-","/").replace("-","/")).getTime();
-				countDown(end_time,"#demo01 .day","#demo01 .hour","#demo01 .minute","#demo01 .second",current_time);
-				$("#gdapply").attr("disabled",false);
-				$("#down_").hide();
-				if(resData.applyFlag == "0"){
-					$("#confirm").show();
+			
+			// 如果页面是通过微信分享页面进入，则需要走一次微信授权认证。
+			if (resData.applyFlag == "1") {
+				$scope.shareEnter();
+			}
+			else {
+			
+				resData.gdBeginDate = resData.gdBeginDate.replace(/-/g,'/');
+				resData.gdEndDate = resData.gdEndDate.replace(/-/g,'/');
+				$scope.now = resData;
+				$scope.$apply();
+
+				//1.结束时间-当前时间
+				//2.转换为天时分秒
+				if(resData.nowFlag == 0){
+					var end_time = new Date(resData.signupEndDate.replace("-","/").replace("-","/") +" 23:59:59").getTime();
+					var current_time = new Date(res.nowTime.replace("-","/").replace("-","/")).getTime();
+					countDown(end_time,"#demo01 .day","#demo01 .hour","#demo01 .minute","#demo01 .second",current_time);
+					$("#gdapply").attr("disabled",false);
+					$("#down_").hide();
+					if(resData.applyFlag == "0"){
+						$("#confirm").show();
+						$("#cancel").hide();
+					}else{
+						
+						$("#confirm").hide();
+						$("#cancel").show();
+					}
+				}else if(resData.nowFlag == 1){
+					$("#gdapply").attr("disabled",true);
+					$("#down_").text('未开始').show();
+					$("#confirm").hide();
 					$("#cancel").hide();
 				}else{
-					
+					$("#gdapply").attr("disabled",true);
 					$("#confirm").hide();
-					$("#cancel").show();
+					$("#cancel").hide();
+					$("#down_").text('已结束').show();
 				}
-			}else if(resData.nowFlag == 1){
-				$("#gdapply").attr("disabled",true);
-				$("#down_").text('未开始').show();
-				$("#confirm").hide();
-				$("#cancel").hide();
-			}else{
-				$("#gdapply").attr("disabled",true);
-				$("#confirm").hide();
-				$("#cancel").hide();
-				$("#down_").text('已结束').show();
+				$scope.$apply();
+				$scope.shareMenu();
 			}
-			$scope.$apply();
-			$scope.shareMenu();
 		}
     })
 	
-	/*立即报名*/
+	/* 微信授权重定向页面 */
+	$scope.shareEnter = function() {
+		
+		//window.location.assign("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb89606f58305f38d&redirect_uri=http://yxgd.yusys.com.cn/subser/wxcontent&response_type=code&scope=snsapi_userinfo&state=STAT#wechat_redirect")
+	}
+	
+	/*微信分享页面*/
 	$scope.shareMenu = function() {
+		
+		// 微信分享必须是当前在微信注册的域名下的页面
 		var url = window.location.href; 
-//		var url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb89606f58305f38d&redirect_uri=http://yxgd.yusys.com.cn/subser/wxcontent&response_type=code&scope=snsapi_userinfo&state=STAT#wechat_redirect";
-//	    var url = "www.baidu.com";
 	    var discuss ;
 	    var title ; 
 	    var shareImgUrl=""; 
@@ -92,11 +105,11 @@
 	    var noncestr; 
 	    var signature; 
 	
-		$.ajax({  
+		$.ajax({
 			    type: "GET",  
 			    url: "subser/WebChatShareController/getSignature",  
 			    data:{url:url},  
-			    success: function(data){  
+			    success: function(data){
 			        console.log("success");  
 			        var objData=JSON.parse(data);  
 			        timestamp=objData.timestamp;  
@@ -104,9 +117,9 @@
 			        signature=objData.signature;  
 			        url=objData.url;
 			        console.log(objData);
-			        alert(url);  
+			        
 			        wx.config({  
-			        	debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。  
+			        	debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。  
 			        	appId: 'wxb89606f58305f38d', // 和获取Ticke的必须一样------必填，公众号的唯一标识  
 			        	timestamp:timestamp, // 必填，生成签名的时间戳  
 			        	nonceStr: noncestr, // 必填，生成签名的随机串  
@@ -130,14 +143,14 @@
 				  	
 					// 获取“分享给朋友”按钮点击状态及自定义分享内容接口
 			        wx.onMenuShareAppMessage({
-			              title: "1231123",
-			              desc: "11111",
+			              title: "宇信共读计划分享测试标题",
+			              desc: "宇信共读计划分享测试描述信息",
 			              link: url,
 			              imgUrl:'http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83erfJg8Y6J7dicQ2iaYCbprMP4E911PFlR0lbuBIfc4FqLRrbk89FYCDMojte2p13icHc6Kibmpb5I6BZQ/132',
 			              type: 'link',
 			              dataUrl: '',
 			              success: function () {
-			                  alert("final success3");
+			                  alert("分享给朋友成功");
 			              },
 			              cancel: function () {   
 				            // 用户取消分享后执行的回调函数  
@@ -147,22 +160,22 @@
 					 
 				     //------------"分享到朋友圈"  
 				     wx.onMenuShareTimeline({  
-				        title: '1', // 分享标题  
-				        desc: '2', // 分享描述  
+				        title: "宇信共读计划分享测试标题",
+			            desc: "宇信共读计划分享测试描述信息", 
 				        link: url, // 分享链接  
 				        imgUrl: 'https://pic1.zhimg.com/da8e974dc_s.jpg', // 分享图标  
 				        type: '', // 分享类型,music、video或link，不填默认为link  
 				        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空  
 				        success: function () {  
-				            alert("朋友圈OK");  
+				            alert("分享朋友圈成功");  
 				        },  
 				        cancel: function () {  
-				           alert("朋友圈cancel");
+				           alert("分享朋友圈失败");
 				        }  
 				     }); 
 				     wx.error(function(res){
 			              // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-			              alert("errorMSG:"+res);
+			              alert("微信分享组件存在异常:"+res);
 				     });
 	  			  });
 			    }, 

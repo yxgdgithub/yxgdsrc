@@ -1,5 +1,6 @@
 package com.mj.mmanage.controller;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -7,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,15 +71,34 @@ public class GdPlanController {
 	 * @param wxUserID
 	 *            微信用户ID
 	 * @return 公共返回信息
+	 * @throws IOException 
 	 * @throw:
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/now",method=RequestMethod.POST)
-	public GdPlan getGdPlansByWXUserID(HttpServletRequest request) throws AppException {
+	public GdPlan getGdPlansByWXUserID(HttpServletRequest request, HttpServletResponse servletResponse) throws AppException, IOException {
 		String userToken = request.getParameter("userToken");
+		
 		logger.info("getGdPlansByWXUserID->execute->userToken->" + userToken);
+		
 		if (StringUtil.isNotEmpty(userToken)) {
-			userToken = userToken.split("&")[0];
+			
+			String[] arryuserToken = userToken.split("&");
+			
+			// 微信分享后的页面url，微信会在正常页面加入一些key:value，以此判断是否从分享页进入。
+			if (arryuserToken.length > 1) {
+				
+				GdPlan returnGdPlan = new GdPlan();
+				
+				returnGdPlan.setShareEntryFlag(Constants.SHARE_ENTRY_FLAG_TRUE);
+				
+				// 通过前台去转向到授权页面
+				return returnGdPlan;
+			}
+			else {
+				
+				userToken = arryuserToken[0];
+			}
 		}
 		
 		logger.info("getGdPlansByWXUserID->execute->userToken.split[&][0]->" + userToken);

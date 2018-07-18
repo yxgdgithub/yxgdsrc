@@ -67,7 +67,16 @@ public class GdPlan extends BaseOperateEntity {
 	@Transient
 	private List<GdBook> gdBook;
 	
+	private String shareEntryFlag;
 	
+	public String getShareEntryFlag() {
+		return shareEntryFlag;
+	}
+
+	public void setShareEntryFlag(String shareEntryFlag) {
+		this.shareEntryFlag = shareEntryFlag;
+	}
+
 	/**
 	 * 当天共读的图书名称
 	 */

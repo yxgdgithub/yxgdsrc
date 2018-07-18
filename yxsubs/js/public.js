@@ -69,6 +69,7 @@ main.ajax = function(param){
 			}
 		},
 		error: function(res) {
+			alert("ajax 请求异常!");
 		}
 	})
 }

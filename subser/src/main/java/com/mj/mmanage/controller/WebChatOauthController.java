@@ -136,6 +136,7 @@ public class WebChatOauthController {
 									String token = TokenMgr.createJWT(UUIDGenerator.getUUID(),Constant.JWT_ISS,TokenMgr.generalSubject(sub), Constant.JWT_TTL);
 									attributes.addFlashAttribute("token", token);
 									logger.info("获取token成功,token->" + token);
+									logger.info("页面转向地址->" + Constants.REDIRECT_URI + "/index.html?token=" + token);
 									servletResponse.sendRedirect(Constants.REDIRECT_URI + "/index.html?token=" + token);
 								} catch (Exception e) {
 									logger.info("获取用户信息失败");

@@ -117,5 +117,7 @@ public class Constants {
      
      public final static String TEMPLATE_URL = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN";
      
+     public final static String SHARE_ENTRY_FLAG_TRUE = "1";
+     
 }
 
