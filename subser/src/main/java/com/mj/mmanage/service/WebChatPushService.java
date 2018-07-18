@@ -1,8 +1,10 @@
 package com.mj.mmanage.service;
 
 import org.apache.log4j.Logger;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 
 import com.mj.webchat.share.HttpsUtil;
 
@@ -18,7 +20,7 @@ public class WebChatPushService implements Runnable {
 		
 		String result = HttpsUtil.httpsRequestToString(templateURL, "POST", jsonObject.toString());
         try {
-            JSONObject resultJson = new JSONObject(result);
+        	JSONObject resultJson = JSON.parseObject(result);
             String errmsg = (String) resultJson.get("errmsg");
     		logger.info("errmsg->"+ errmsg);	
         } catch (JSONException e) {

@@ -5,13 +5,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.apache.log4j.Logger;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONException;
 import com.mj.mmanage.model.GdApply;
 import com.mj.mmanage.model.GdPlan;
 import com.mj.mmanage.service.GdPlanService;
@@ -28,7 +28,7 @@ public class WebChatPushController {
 	@Autowired
     private GdPlanService gdPlanService;
 	
-	@Scheduled(cron = "0 00 17 * * ?")
+	@Scheduled(cron = "0 36 16 * * ?")
 	public void authoPushWechatmsgToUser() {
 		
 //		您有一条新的阅读任务待签到
@@ -113,7 +113,7 @@ public class WebChatPushController {
         
         String response = HttpsUtil.httpsRequestToString(Constants.ACCESS_TOKEN_URL, "GET", null);
         
-        com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(response);
+        JSONObject jsonObject = JSON.parseObject(response);
         logger.info("jsonObject-->"+jsonObject);
         
         String token = jsonObject.getString("access_token");
@@ -132,12 +132,14 @@ public class WebChatPushController {
 	        	String toWxUserId = lstGdApply.get(i).getWxUserId();
 	        	
 	        	// 测试只给李海龙、陈翔、宁兆路发送推送消息
-	        	// if (toWxUserId.equals("oC98LuC7T2U_B4Juy6HBO17kZfaE") || toWxUserId.equals("oC98LuIFhx8kBL5W1K4uFGgIkD2g") || toWxUserId.equals("oC98LuEf5GFwBTYRzPF6eXCeGr-Q")) {
+	        	 if (toWxUserId.equals("oC98LuC7T2U_B4Juy6HBO17kZfaE")) {
+	        			 // || toWxUserId.equals("oC98LuIFhx8kBL5W1K4uFGgIkD2g") || toWxUserId.equals("oC98LuEf5GFwBTYRzPF6eXCeGr-Q")) {
 	        
 			        JSONObject json = new JSONObject();
 			        try {
 			            json.put("touser", toWxUserId);
 			            json.put("template_id", templat_id);
+			            logger.info("clickurl->" + clickurl);
 			            json.put("url", clickurl);
 			            json.put("topcolor", topcolor);
 			            json.put("data", data);
@@ -151,7 +153,7 @@ public class WebChatPushController {
 			        
 			        executorService.execute(webChatPushService);
 	        	}
-	        //}
+	        }
         }
         else {
         	logger.info("今日无需要推送的人员");
