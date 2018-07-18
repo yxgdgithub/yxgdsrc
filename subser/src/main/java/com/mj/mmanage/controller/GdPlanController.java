@@ -91,7 +91,7 @@ public class GdPlanController {
 				GdPlan returnGdPlan = new GdPlan();
 				
 				returnGdPlan.setShareEntryFlag(Constants.SHARE_ENTRY_FLAG_TRUE);
-				
+				logger.info("判断出请求从分享页面发起，需要前台重新定向");
 				// 通过前台去转向到授权页面
 				return returnGdPlan;
 			}

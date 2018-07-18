@@ -111,8 +111,8 @@ public class Constants {
      public final static String WEBCHAT_GRANT_SCOPE = "snsapi_userinfo";	
      
      // 每日定时推送使用的信息
-     public final static String PUSH_TEMPLAT_ID = "qi8tgvQUveG4h5Bzpn2eH7iGFW3T8Z6EnW";
-     public final static String PUSH_TEMPLAT_CLICKURL = "qi8tgvQUveG4h5Bzpn2eH7iGFW3T8Z6EnW";
+     public final static String PUSH_TEMPLAT_ID = "khaxMSqxMTgH91hy6Eu0RYrJw0Tlv0pTY8VlfZOPesA";
+     public final static String PUSH_TEMPLAT_CLICKURL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb89606f58305f38d&redirect_uri=http://yxgd.yusys.com.cn/subser/wxcontent&response_type=code&scope=snsapi_userinfo&state=STAT#wechat_redirect";
      public final static String PUSH_TEMPLAT_TOPCOLOR = "#173177";
      
      public final static String TEMPLATE_URL = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN";

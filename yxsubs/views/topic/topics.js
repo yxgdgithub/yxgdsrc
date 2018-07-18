@@ -44,7 +44,7 @@
 			var resData = res.content;
 			
 			// 如果页面是通过微信分享页面进入，则需要走一次微信授权认证。
-			if (resData.applyFlag == "1") {
+			if (resData.shareEntryFlag == "1") {
 				$scope.shareEnter();
 			}
 			else {
@@ -89,8 +89,8 @@
 	
 	/* 微信授权重定向页面 */
 	$scope.shareEnter = function() {
-		
-		//window.location.assign("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb89606f58305f38d&redirect_uri=http://yxgd.yusys.com.cn/subser/wxcontent&response_type=code&scope=snsapi_userinfo&state=STAT#wechat_redirect")
+				
+		window.location.assign("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb89606f58305f38d&redirect_uri=http://yxgd.yusys.com.cn/subser/wxcontent&response_type=code&scope=snsapi_userinfo&state=STAT#wechat_redirect")
 	}
 	
 	/*微信分享页面*/
