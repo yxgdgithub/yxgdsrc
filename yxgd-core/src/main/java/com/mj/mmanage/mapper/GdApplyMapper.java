@@ -12,7 +12,15 @@ import com.mj.mmanage.model.GdApply;
 
 public interface GdApplyMapper extends Mapper<GdApply>, MySqlMapper<GdApply>  {
 	
-	@Select("select distinct wxUserId from t_gd_apply where gdid = #{gdId} ")
-	public List<GdApply> findGdApplyWxUserId(@Param("gdId") int gdId);
+	
+	/**
+	 * @param gdId 共读编号
+	 * @param signInDate 签到日期
+	 * @return 取得签到日期未签到的微信用户ID
+	 */
+	@Select(" select distinct apply.wxUserId from t_gd_apply apply "
+			+ " where apply.wxUserId not in (select wxUserId from t_gd_sign_in where signInDate = #{signInDate} and gdId = #{gdId} ) "
+			+ " and apply.gdId = #{gdId} ")
+	public List<GdApply> findGdApplyWxUserId(@Param("gdId") int gdId, @Param("signInDate") String signInDate);
 
 }

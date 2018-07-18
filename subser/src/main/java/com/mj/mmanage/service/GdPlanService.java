@@ -282,8 +282,8 @@ public class GdPlanService {
 	 * @param gdId
 	 * @return 根据共读ID获得报名的微信用户ID
 	 */
-	public List<GdApply> findGdApplyWxUserId(int gdId) {
-		return gdApplyMapper.findGdApplyWxUserId(gdId);
+	public List<GdApply> findGdApplyWxUserId(int gdId, String signInDate) {
+		return gdApplyMapper.findGdApplyWxUserId(gdId, signInDate);
 	}
 	/**
 	 * @param gdPeriod

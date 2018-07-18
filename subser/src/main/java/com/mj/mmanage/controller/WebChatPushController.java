@@ -28,7 +28,11 @@ public class WebChatPushController {
 	@Autowired
     private GdPlanService gdPlanService;
 	
-	@Scheduled(cron = "0 0 17 * * ?")
+	/*
+	 * 上午9点、下午5点各推送一次
+	 */
+	@Scheduled(cron = "0 0 8,18 * * ?")
+//	@Scheduled(cron = "0 25 17 * * ?")
 	public void authoPushWechatmsgToUser() {
 		
 //		您有一条新的阅读任务待签到
@@ -119,11 +123,12 @@ public class WebChatPushController {
         String token = jsonObject.getString("access_token");
         String templateURL = Constants.TEMPLATE_URL.replace("ACCESS_TOKEN", token);
         
-        List<GdApply> lstGdApply =  gdPlanService.findGdApplyWxUserId(gdId);
+        // 当天需要签到，而未签到的
+        List<GdApply> lstGdApply =  gdPlanService.findGdApplyWxUserId(gdId, DateUtil.getCurrentDate2Str("yyyyMMdd"));
         
         if (lstGdApply != null) {
         	
-        	logger.info("今日需要推送的人数->" + lstGdApply.size());
+        	logger.info("今日本次需要推送的人数->" + lstGdApply.size());
         	
 	        ExecutorService executorService = Executors.newFixedThreadPool(10);
 	        
@@ -132,7 +137,7 @@ public class WebChatPushController {
 	        	String toWxUserId = lstGdApply.get(i).getWxUserId();
 	        	
 	        	// 测试只给李海龙、陈翔、宁兆路发送推送消息
-	        	// if (toWxUserId.equals("oC98LuC7T2U_B4Juy6HBO17kZfaE") || toWxUserId.equals("oC98LuIFhx8kBL5W1K4uFGgIkD2g") || toWxUserId.equals("oC98LuEf5GFwBTYRzPF6eXCeGr-Q")) {
+	        	//if (toWxUserId.equals("oC98LuC7T2U_B4Juy6HBO17kZfaE") || toWxUserId.equals("oC98LuIFhx8kBL5W1K4uFGgIkD2g") || toWxUserId.equals("oC98LuEf5GFwBTYRzPF6eXCeGr-Q")) {
 	        
 			        JSONObject json = new JSONObject();
 			        try {
@@ -152,7 +157,7 @@ public class WebChatPushController {
 			        
 			        executorService.execute(webChatPushService);
 	        	}
-	        // }
+	         //}
         }
         else {
         	logger.info("今日无需要推送的人员");
