@@ -1,6 +1,8 @@
 package com.mj.mmanage.job;
 
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,7 @@ import com.mj.mmanage.mapper.GdChapterPerDayRelMapper;
 import com.mj.mmanage.model.GdChapterPerDayRel;
 import com.mj.mmanage.model.GdPlan;
 import com.mj.mmanage.util.DateUtil;
+import com.mj.webchat.util.AccessTokenUtil;
 
 @Component
 public class Jobs {
@@ -93,6 +96,21 @@ public class Jobs {
 		   }
 			
 		   logger.info("定时任务执行完毕------->");	
+	}
+	
+	@Scheduled(cron = "0 0 0-23 * * ?")
+	public void getWebChatAccessTokenJob() {
+		logger.info("定时任务执行开始------->");
+		
+		AccessTokenUtil.getWebChatAccessToken();
+		
+		try {
+			AccessTokenUtil.getJSAPITicket();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+			
+		logger.info("定时任务执行完毕------->");	
 	}
 	
 }

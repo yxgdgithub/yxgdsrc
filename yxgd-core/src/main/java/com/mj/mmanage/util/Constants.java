@@ -84,15 +84,15 @@ public class Constants {
 	 public final static String WEBCHAT_TOKEN = "yxgd";
 	 
 	 // 获取code的请求地址,授权使用
-	 public static String Get_Code 
+	 public static String Get_Oauth2_Code 
 	 	= "https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=%s&state=STAT#wechat_redirect";
 
 	 // 获取Web_access_token https的请求地址,授权使用
-	 public static String Web_access_tokenhttps 
+	 public static String Web_oauth2_access_tokenhttps 
 	 	= "https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code"; 
 	
 	 // 拉取用户信息的请求地址,授权使用
-	 public static String User_Message 
+	 public static String User_Message
 	 	= "https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN";
 
 	 // 获取ACCESS_TOKEN_URL,分享使用
@@ -118,6 +118,8 @@ public class Constants {
      public final static String TEMPLATE_URL = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN";
      
      public final static String SHARE_ENTRY_FLAG_TRUE = "1";
+     
+     public final static String JSAPI_MAP_KEY = "YXGD_JSAPI_TICKET";
      
 }
 

@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSONException;
 import com.mj.mmanage.model.GdApply;
 import com.mj.mmanage.model.GdPlan;
@@ -18,7 +18,7 @@ import com.mj.mmanage.service.GdPlanService;
 import com.mj.mmanage.service.WebChatPushService;
 import com.mj.mmanage.util.Constants;
 import com.mj.mmanage.util.DateUtil;
-import com.mj.webchat.share.HttpsUtil;
+import com.mj.webchat.util.AccessTokenUtil;
 
 @Component
 public class WebChatPushController {
@@ -115,52 +115,55 @@ public class WebChatPushController {
 										  String topcolor, 
 										  JSONObject data) {
         
-        String response = HttpsUtil.httpsRequestToString(Constants.ACCESS_TOKEN_URL, "GET", null);
+        String token = AccessTokenUtil.ACCESS_TOKEN;
+        logger.info("access_token->" + token);
         
-        JSONObject jsonObject = JSON.parseObject(response);
-        logger.info("jsonObject-->"+jsonObject);
+        if (!StringUtils.isEmpty(token)) {
         
-        String token = jsonObject.getString("access_token");
-        String templateURL = Constants.TEMPLATE_URL.replace("ACCESS_TOKEN", token);
-        
-        // 当天需要签到，而未签到的
-        List<GdApply> lstGdApply =  gdPlanService.findGdApplyWxUserId(gdId, DateUtil.getCurrentDate2Str("yyyyMMdd"));
-        
-        if (lstGdApply != null) {
-        	
-        	logger.info("今日本次需要推送的人数->" + lstGdApply.size());
-        	
-	        ExecutorService executorService = Executors.newFixedThreadPool(10);
+	        String templateURL = Constants.TEMPLATE_URL.replace("ACCESS_TOKEN", token);
 	        
-	        for (int i = 0; i < lstGdApply.size(); i++) {
+	        // 当天需要签到，而未签到的
+	        List<GdApply> lstGdApply =  gdPlanService.findGdApplyWxUserId(gdId, DateUtil.getCurrentDate2Str("yyyyMMdd"));
 	        
-	        	String toWxUserId = lstGdApply.get(i).getWxUserId();
+	        if (lstGdApply != null) {
 	        	
-	        	// 测试只给李海龙、陈翔、宁兆路发送推送消息
-	        	//if (toWxUserId.equals("oC98LuC7T2U_B4Juy6HBO17kZfaE") || toWxUserId.equals("oC98LuIFhx8kBL5W1K4uFGgIkD2g") || toWxUserId.equals("oC98LuEf5GFwBTYRzPF6eXCeGr-Q")) {
-	        
-			        JSONObject json = new JSONObject();
-			        try {
-			            json.put("touser", toWxUserId);
-			            json.put("template_id", templat_id);
-			            logger.info("clickurl->" + clickurl);
-			            json.put("url", clickurl);
-			            json.put("topcolor", topcolor);
-			            json.put("data", data);
-			        } catch (JSONException e) {
-			            e.printStackTrace();
-			        }
-			        
-			        WebChatPushService webChatPushService =  new WebChatPushService();
-			        webChatPushService.setJsonObject(json);
-			        webChatPushService.setTemplateURL(templateURL);
-			        
-			        executorService.execute(webChatPushService);
-	        	}
-	         //}
+	        	logger.info("今日本次需要推送的人数->" + lstGdApply.size());
+	        	
+		        ExecutorService executorService = Executors.newFixedThreadPool(10);
+		        
+		        for (int i = 0; i < lstGdApply.size(); i++) {
+		        
+		        	String toWxUserId = lstGdApply.get(i).getWxUserId();
+		        	
+		        	// 测试只给李海龙、陈翔、宁兆路发送推送消息
+		        	//if (toWxUserId.equals("oC98LuC7T2U_B4Juy6HBO17kZfaE") || toWxUserId.equals("oC98LuIFhx8kBL5W1K4uFGgIkD2g") || toWxUserId.equals("oC98LuEf5GFwBTYRzPF6eXCeGr-Q")) {
+		        
+				        JSONObject json = new JSONObject();
+				        try {
+				            json.put("touser", toWxUserId);
+				            json.put("template_id", templat_id);
+				            logger.info("clickurl->" + clickurl);
+				            json.put("url", clickurl);
+				            json.put("topcolor", topcolor);
+				            json.put("data", data);
+				        } catch (JSONException e) {
+				            e.printStackTrace();
+				        }
+				        
+				        WebChatPushService webChatPushService =  new WebChatPushService();
+				        webChatPushService.setJsonObject(json);
+				        webChatPushService.setTemplateURL(templateURL);
+				        
+				        executorService.execute(webChatPushService);
+		        	}
+		         //}
+	        }
+	        else {
+	        	logger.info("今日无需要推送的人员");
+	        }
         }
         else {
-        	logger.info("今日无需要推送的人员");
+        	logger.error("access_token未获取，未推送消息!");
         }
         
         return "success";

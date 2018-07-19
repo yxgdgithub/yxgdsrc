@@ -30,7 +30,8 @@ public class HttpsUtil {
      * @return 请求响应内容转换成字符串信息
      */
     public static String httpsRequestToString(String path, String method, String body) {
-        if (path == null || method == null) {
+        
+    	if (path == null || method == null) {
             return null;
         }
  
