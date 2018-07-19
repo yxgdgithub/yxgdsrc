@@ -23,17 +23,18 @@ public class AccessTokenUtil {
 	public static Ticket JSAPI_TICKET = null;
 	
 	public static void getWebChatAccessToken() {
-		
+		System.out.println("getWebChatAccessToken 开始执行...");
 		String response = HttpsUtil.httpsRequestToString(Constants.ACCESS_TOKEN_URL, "GET", null);
         
         JSONObject jsonObject = JSON.parseObject(response);
         logger.info("WebChatAccessToken JsonObject-->" + jsonObject);
         ACCESS_TOKEN = jsonObject.getString("access_token");
         logger.info("WebChatAccessToken 获取完毕! ACCESS_TOKEN->" + ACCESS_TOKEN);
+        System.out.println("getWebChatAccessToken 结束执行...");
 	}
 	
 	public static void getJSAPITicket() throws IOException {
-		
+		System.out.println("getJSAPITicket 开始执行...");
 		// 获取签名随即字符串
 		GetRandomStr randomStr = new GetRandomStr();
 		String noncestr = randomStr.getRandomString(15);
@@ -74,5 +75,6 @@ public class AccessTokenUtil {
 		else {
 			logger.error("access_token获取失败，未能生成JSAPI_TICKET");
 		}
+		System.out.println("getJSAPITicket 结束执行...");
 	}
 }
