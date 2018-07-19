@@ -38,13 +38,6 @@ public class App  extends WebMvcConfigurerAdapter
     	System.out.println("系统开始启动......");
         SpringApplication.run(App.class, args);
         
-        AccessTokenUtil.getWebChatAccessToken();
-		
-		try {
-			AccessTokenUtil.getJSAPITicket();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		System.out.println("系统启动成功...");
         logger.info("系统启动成功...");
     }
