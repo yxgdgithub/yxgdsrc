@@ -56,6 +56,8 @@ main.ajax = function(param){
 		contentType: contentPar,
 		//timeout: isNaN(JSON.parse(_data).timeout) ? 1000 * 30 : parseInt(JSON.parse(_data).timeout) * 1000,
 		success: function(res) {
+			document.title = "宇信共读-伴你左右";
+		
 			if(typeof res == "string" && res){
 				res = JSON.parse(res);
 			}else{
@@ -63,6 +65,7 @@ main.ajax = function(param){
 			}
 			if(res&&res.retCode == "AAAAAAA"){
 				if(typeof _back == "function"){
+					
 					_back(res);
 				}
 			}else{

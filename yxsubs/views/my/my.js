@@ -23,7 +23,6 @@
 			"_type":"post",
 			"_data":{'userToken': userToken},
 			"_back":function(res){
-				document.title = "宇信共读-伴你左右";
 				if(res.content.signFlag == 0){
 					$("#signOut").css("display","block").show();
 					$("#signIn").hide();

@@ -43646,7 +43646,7 @@ IonicModule
 
     backButton: {
       icon: 'ion-ios-arrow-back',
-      text: 'Back',
+      text: '返回',
       previousTitleText: true
     },
 
@@ -43750,7 +43750,6 @@ IonicModule
         } else if (direction == 'back') {
           setStyles(enteringEle, (1 - 0.1 * (1 - step)), (1 - step) * -33, -1);
           setStyles(leavingEle, 1, step * 100, 1 - step);
-
         } else {
           // swap, enter, exit
           setStyles(enteringEle, 1, 0, -1);
@@ -47630,6 +47629,7 @@ function($scope, $element, $attrs, $compile, $timeout, $ionicNavBarDelegate, $io
 
       if (itemType === 'title') {
         // title element
+       
         titleEle.append(ele);
 
       } else if (itemType == 'rightButtons' ||
@@ -50094,9 +50094,13 @@ function($scope, $element, $attrs, $compile, $rootScope) {
     // only listen for title updates after it has entered
     // but also deregister the observe before it leaves
     var viewTitleAttr = isDefined($attrs.viewTitle) && 'viewTitle' || isDefined($attrs.title) && 'title';
+    
     if (viewTitleAttr) {
-      titleUpdate($attrs[viewTitleAttr]);
-      deregisters.push($attrs.$observe(viewTitleAttr, titleUpdate));
+    	
+       // lhl update 注释原有代码，不变更标题 20180719
+       // titleUpdate($attrs[viewTitleAttr]);
+       deregisters.push($attrs.$observe(viewTitleAttr, titleUpdate));
+       
     }
 
     if (isDefined($attrs.hideBackButton)) {
@@ -50112,12 +50116,13 @@ function($scope, $element, $attrs, $compile, $rootScope) {
     }
   }
 
-
+	// lhl update 注释原有代码，不变更标题 20180719
   function titleUpdate(newTitle) {
-    if (isDefined(newTitle) && newTitle !== viewTitle) {
-      viewTitle = newTitle;
-      navViewCtrl.title(viewTitle);
-    }
+//  if (isDefined(newTitle) && newTitle !== viewTitle) {
+//    viewTitle = newTitle;
+//    navViewCtrl.title(viewTitle);
+//  }
+    document.title = "宇信共读-伴你左右";
   }
 
 

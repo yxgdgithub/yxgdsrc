@@ -41,7 +41,6 @@
 		"_type":"post",
 		"_data":{'userToken': userToken},
 		"_back":function(res){
-			document.title = "宇信共读-伴你左右";
 			var resData = res.content;
 			
 			// 如果页面是通过微信分享页面进入，则需要走一次微信授权认证。

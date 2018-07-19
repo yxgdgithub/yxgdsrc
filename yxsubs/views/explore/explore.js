@@ -3,7 +3,6 @@ angular.module('ioniclub')
 .controller('ExploreCtrl', function($scope, $timeout, $cordovaGoogleAnalytics, $ionicSlideBoxDelegate) {
 
 	var userToken=$("#userToken").val();
-	document.title = "宇信共读-伴你左右";
 	$scope.$on('$ionicView.afterEnter', function() {
 	    document.addEventListener("deviceready", function() {
 	      // trackView
@@ -17,6 +16,7 @@ angular.module('ioniclub')
 	$scope.index = 0;
 	explore(0);
 	$scope.slideChanged = function(index){
+		
 		$scope.index = index;
 	
 		if (index == 0) {
@@ -25,7 +25,6 @@ angular.module('ioniclub')
 			"_type":"post",
 			"_data":{'userToken': userToken},
 			"_back":function(res){
-					document.title = "宇信共读-伴你左右";
 					$scope.underway = res.content;
 					$scope.$apply();
 			}
@@ -37,7 +36,6 @@ angular.module('ioniclub')
 			"_type":"post",
 			"_data":{'userToken': userToken},
 			"_back":function(res){
-					document.title = "宇信共读-伴你左右";
 					$scope.accomplish = res.content;
 					$scope.$apply();
 			}
@@ -49,7 +47,6 @@ angular.module('ioniclub')
 			"_type":"post",
 			"_data":{'userToken': userToken},
 			"_back":function(res){
-					document.title = "宇信共读-伴你左右";
 					$scope.advance = res.content;
 				    $scope.$apply();
 			}
@@ -66,15 +63,15 @@ angular.module('ioniclub')
 	
 	/*共读计划接口*/
 	function explore(){
+		
 		main.ajax({
 			"_url": "/subser/gdplan/list/"+0,
 			"_type":"post",
 			"_data":{'userToken': userToken},
 			"_back":function(res){
-					document.title = "宇信共读-伴你左右";
+					
 					$scope.underway = res.content;
 					$scope.$apply();
-					
 			}
 		})
 	}
@@ -139,4 +136,5 @@ angular.module('ioniclub')
 			
 		}
 	})
+	
 })

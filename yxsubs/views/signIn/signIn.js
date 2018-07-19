@@ -15,7 +15,7 @@ angular.module('ioniclub')
 				userToken:userToken
 			},
 			"_back":function(res){
-				document.title = "宇信共读-伴你左右";
+				
 				$scope.mysign = res.content;
 				var mysignObject = res.content;
 				var dateString = mysignObject.gdEndDate;
