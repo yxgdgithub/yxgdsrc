@@ -42,6 +42,8 @@
 		"_data":{'userToken': userToken},
 		"_back":function(res){
 			var resData = res.content;
+			var gdTitle = resData.gdTitle;
+			var gdSlogan = resData.gdSlogan;
 			
 			// 如果页面是通过微信分享页面进入，则需要走一次微信授权认证。
 			if (resData.shareEntryFlag == "1") {
@@ -82,7 +84,7 @@
 					$("#down_").text('已结束').show();
 				}
 				$scope.$apply();
-				$scope.shareMenu();
+				$scope.shareMenu(gdTitle, gdSlogan);
 			}
 		}
     })
@@ -96,16 +98,16 @@
 	}
 	
 	/*微信分享页面*/
-	$scope.shareMenu = function() {
+	$scope.shareMenu = function(gdTitle, gdSlogan) {
 		
 		// 微信分享必须是当前在微信注册的域名下的页面
 		var url = window.location.href; 
-	    var discuss ;
-	    var title ; 
+	    
 	    var shareImgUrl=""; 
 	    var timestamp; 
 	    var noncestr; 
 	    var signature; 
+	    var appId;
 	
 		$.ajax({
 			    type: "GET",  
@@ -118,11 +120,13 @@
 			        noncestr=objData.noncestr;  
 			        signature=objData.signature;  
 			        url=objData.url;
+			        appId=objData.appId;
+			        
 			        console.log(objData);
 			        
 			        wx.config({  
 			        	debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。  
-			        	appId: 'wxb89606f58305f38d', // 和获取Ticke的必须一样------必填，公众号的唯一标识  
+			        	appId: appId, // 和获取Ticke的必须一样------必填，公众号的唯一标识  
 			        	timestamp:timestamp, // 必填，生成签名的时间戳  
 			        	nonceStr: noncestr, // 必填，生成签名的随机串  
 			        	signature: signature,// 必填，签名，见附录1  
@@ -145,10 +149,10 @@
 				  	
 					// 获取“分享给朋友”按钮点击状态及自定义分享内容接口
 			        wx.onMenuShareAppMessage({
-			              title: "宇信共读计划分享测试标题",
-			              desc: "宇信共读计划分享测试描述信息",
+			              title: gdTitle,
+			              desc: gdSlogan,
 			              link: url,
-			              imgUrl:'http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83erfJg8Y6J7dicQ2iaYCbprMP4E911PFlR0lbuBIfc4FqLRrbk89FYCDMojte2p13icHc6Kibmpb5I6BZQ/132',
+			              imgUrl: 'http://yxgd.yusys.com.cn/img/login_logo.png',
 			              type: 'link',
 			              dataUrl: '',
 			              success: function () {
@@ -162,10 +166,10 @@
 					 
 				     //------------"分享到朋友圈"  
 				     wx.onMenuShareTimeline({  
-				        title: "宇信共读计划分享测试标题",
-			            desc: "宇信共读计划分享测试描述信息", 
+				        title: gdTitle,
+			            desc: gdSlogan, 
 				        link: url, // 分享链接  
-				        imgUrl: 'https://pic1.zhimg.com/da8e974dc_s.jpg', // 分享图标  
+				       	imgUrl: 'http://yxgd.yusys.com.cn/img/login_logo.png', // 分享图标  
 				        type: '', // 分享类型,music、video或link，不填默认为link  
 				        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空  
 				        success: function () {  
