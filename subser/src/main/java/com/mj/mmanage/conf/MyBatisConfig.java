@@ -26,7 +26,6 @@ package com.mj.mmanage.conf;
 
 import com.github.pagehelper.PageHelper;
 
-import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -42,7 +41,6 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 
 import javax.sql.DataSource;
 
-import java.sql.SQLException;
 import java.util.Properties;
 
 /**
@@ -62,12 +60,12 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
     public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         
-if (dataSource != null) {
-	System.out.println("dataSource is not null" + dataSource.getConnection().getClientInfo().getProperty("name"));
-}
-else {
-	System.out.println("dataSource is null");
-}
+		if (dataSource != null) {
+			System.out.println("dataSource is not null");
+		}
+		else {
+			System.out.println("dataSource is null");
+		}
         
         bean.setDataSource(dataSource);
         bean.setTypeAliasesPackage("com.mj.mmanage.model");

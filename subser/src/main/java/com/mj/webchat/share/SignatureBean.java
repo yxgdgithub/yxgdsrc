@@ -1,11 +1,18 @@
 package com.mj.webchat.share;
 
+import com.mj.mmanage.util.Constants;
+
 public class SignatureBean {
 	 private String noncestr;
 	 private String url;
 	 private String timestamp;
 	 private String signature;
-	 public String getNoncestr() {
+	 private String appId = Constants.APPID;
+	 
+	 public String getAppId() {
+		return appId;
+	}
+	public String getNoncestr() {
 	 return noncestr;
 	 }
 	 public void setNoncestr(String noncestr) {
