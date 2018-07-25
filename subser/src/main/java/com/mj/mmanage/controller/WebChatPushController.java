@@ -3,15 +3,16 @@ package com.mj.mmanage.controller;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 import com.mj.mmanage.model.GdApply;
 import com.mj.mmanage.model.GdPlan;
 import com.mj.mmanage.service.GdPlanService;
@@ -157,6 +158,24 @@ public class WebChatPushController {
 				        executorService.execute(webChatPushService);
 		        	}
 		         //}
+		        
+		        try {  
+		        	
+		        	// 通知关闭
+		        	executorService.shutdown();  
+		       
+		            // 所有的任务都结束的时候，返回TRUE
+		            if(!executorService.awaitTermination(Constants.EXECUTOR_SERVICE_AWAIT_TIME, TimeUnit.MILLISECONDS)){  
+		                
+		            	// 超时的时候向线程池中所有的线程发出中断(interrupted)。  
+		            	executorService.shutdownNow();  
+		            }  
+		        } catch (InterruptedException e) {  
+		        	
+		            // awaitTermination方法被中断的时候也中止线程池中全部的线程的执行。  
+		            logger.error("awaitTermination interrupted: " + e);  
+		            executorService.shutdownNow();  
+		        }  
 	        }
 	        else {
 	        	logger.info("今日无需要推送的人员");
