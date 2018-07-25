@@ -106,8 +106,14 @@ public class Constants {
 //	 public final static String REDIRECT_URI = "http://127.0.0.1";
 	 public final static String REDIRECT_URI = "http://yxgd.yusys.com.cn";
 
+	 // 微信测试号
      public final static String APPID = "wxb89606f58305f38d";
      public final static String SECRET = "9cf587bf826a8c75cebaceb0f4c0e063";
+	 
+     // 宇信大学微信ID
+//	 public final static String APPID = "wx59e5726de8ab5a3b";
+//	 public final static String SECRET = "b0e0d2de90837f35a936a171f3ce0a2f";
+	 
      public final static String WEBCHAT_GRANT_SCOPE = "snsapi_userinfo";	
      
      // 每日定时推送使用的信息
@@ -120,6 +126,8 @@ public class Constants {
      public final static String SHARE_ENTRY_FLAG_TRUE = "1";
      
      public final static String JSAPI_MAP_KEY = "YXGD_JSAPI_TICKET";
+     
+     public final static int EXECUTOR_SERVICE_AWAIT_TIME = 8*1000;
      
 }
 
